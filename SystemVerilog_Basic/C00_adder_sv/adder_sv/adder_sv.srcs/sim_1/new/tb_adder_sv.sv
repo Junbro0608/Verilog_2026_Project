@@ -56,7 +56,9 @@ module tb_adder_sv ();
     initial begin
         //class generator 를 생성
         // generator class의 function newrk 실행됨
+        //new 생성자
         gen = new(adder_interf);
+        // 생성된 후 task run 실행
         gen.run();
         $stop;
     end
