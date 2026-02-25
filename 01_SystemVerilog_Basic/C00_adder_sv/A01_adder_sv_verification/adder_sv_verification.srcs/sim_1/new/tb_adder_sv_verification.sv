@@ -117,8 +117,24 @@ class scoreboard;
         forever begin
             mon2scb_mbox.get(tr);
             //compare, pass, fail
-            $display("%t:a=%d, b=%d, mode= %d, s= %d, c=%d", $time, tr.a, tr.b,
+            $write("%t:a=%d, b=%d, mode= %d, s= %d, c=%d", $time, tr.a, tr.b,
                      tr.mode, tr.s, tr.c);
+            case (tr.mode)
+            0: begin
+                if (tr.a + tr.b == {tr.c,tr.s}) begin
+                    $display(" ->T");
+                end else begin
+                    $display(" ->F");
+                end
+            end
+            1:begin
+                if (tr.a - tr.b == {tr.c,tr.s}) begin
+                    $display(" ->T");
+                end else begin
+                    $display(" ->F");
+                end
+            end
+            endcase
             ->gen_next_ev;
         end
     endtask
@@ -159,7 +175,7 @@ class environment;
 endclass  //environment
 
 module tb_adder_sv_verification ();
-
+    
     adder_interface adder_if ();
     environment env;
 
@@ -174,6 +190,7 @@ module tb_adder_sv_verification ();
     );
 
     initial begin
+        $timeformat(-9, 3, " ns", 10);
         // constructor
         env = new(adder_if);
 
