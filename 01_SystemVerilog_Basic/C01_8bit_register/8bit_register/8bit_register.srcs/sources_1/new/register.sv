@@ -5,6 +5,7 @@ module register #(
 ) (
     input                        clk,
     input                        rst,
+    input  logic                 we,
     input  logic [BIT_WIDTH-1:0] wdata,
     output logic [BIT_WIDTH-1:0] rdata
 );
@@ -13,7 +14,9 @@ module register #(
         if (rst) begin
             rdata <= 0;
         end else begin
-            rdata <= wdata;
+            if (we) begin
+                rdata <= wdata;
+            end
         end
     end
 

@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
-`define MODE_0_1_2
+`define MODE_0_1_2 0;
 
 
 
 module tb_fork_join ();
-    localparam int MODE = 4;
+localparam MODE = 4;
     //1
     if (MODE == 0) begin
         initial begin
@@ -101,19 +101,19 @@ module tb_fork_join ();
 
 
     //--------------case1,2,3----------------
-`ifdef MODE_0_1_2
-    task A_thread();
-        $display("%t : A thread", $realtime);
-    endtask  //A_thread
 
-    task B_thread();
-        $display("%t : B thread", $realtime);
-    endtask  //B_thread
+    // task A_thread();
+    //     $display("%t : A thread", $realtime);
+    // endtask  //A_thread
 
-    task C_thread();
-        $display("%t : C thread", $realtime);
-    endtask  //C_thread
-`else
+    // task B_thread();
+    //     $display("%t : B thread", $realtime);
+    // endtask  //B_thread
+
+    // task C_thread();
+    //     $display("%t : C thread", $realtime);
+    // endtask  //C_thread
+
     //-----------case4,5---------------------
     task A_thread();
         repeat (5) $display("%t : A thread", $realtime);
@@ -131,7 +131,7 @@ module tb_fork_join ();
             #10;
         end
     endtask  //C_thread
-`endif
+
 
 
 
