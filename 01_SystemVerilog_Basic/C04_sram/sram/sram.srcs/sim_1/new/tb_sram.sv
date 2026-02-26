@@ -110,18 +110,29 @@ class scoreboard;
     mailbox #(transaction) mon2scb_mbox;
     event gen_next_ev;
 
-    logic [`BIT_WIDTH-1:0] scb_mem[0:`DATA_ADDR-1];
-
     int pass_cnt = 0, fail_cnt = 0, try_cnt = 0;
+
+    covergroup cg_sram;
+        cp_addr: coverpoint tr.addr{
+            bins min = {0};
+            bins max = {15};
+            bins mid[] = {[1:14]};
+        }
+    endgroup
 
     function new(mailbox#(transaction) mon2scb_mbox, event gen_next_ev);
         this.mon2scb_mbox = mon2scb_mbox;
         this.gen_next_ev  = gen_next_ev;
+        cg_sram = new();
     endfunction  //new()
 
     task run();
+    logic [`BIT_WIDTH-1:0] scb_mem[0:`DATA_ADDR-1];
         forever begin
             mon2scb_mbox.get(tr);
+            tr.display("scb");
+
+            cg_sram.sample();
 
             if (tr.we) begin
                 scb_mem[tr.addr] = tr.wdata;
@@ -139,7 +150,6 @@ class scoreboard;
                 end
             end
 
-            tr.display("scb");
             ->gen_next_ev;
         end
 
@@ -171,7 +181,7 @@ class environment;
 
     task run();
         fork
-            gen.run(256);
+            gen.run(100);
             drv.run();
             mon.run();
             scb.run();
@@ -187,7 +197,8 @@ class environment;
         $display("  PASS      |  Success Matches   |   %3d    ", scb.pass_cnt);
         $display("  FAIL      |  Mismatch Errors   |   %3d    ", scb.fail_cnt);
         $display("============================================");
-
+        $display("coverage addr = %d%%",scb.cg_sram.get_inst_coverage());
+        $display("============================================");
         $stop;
     endtask  //run
 
