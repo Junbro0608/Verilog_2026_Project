@@ -8,8 +8,8 @@ interface fifo_interface (
 );
     logic                  rst;
     logic                  we;
-    logic [`BIT_WIDTH-1:0] wdata;
     logic                  re;
+    logic [`BIT_WIDTH-1:0] wdata;
     logic [`BIT_WIDTH-1:0] rdata;
     logic                  full;
     logic                  empty;
@@ -25,7 +25,7 @@ class transaction;
 
     function void display(string name);
         $display(
-            "%t: [%s] we = %h, wdata = %h | re = %h, rdata = %2h | full = %h, empty = %h",
+            "%t: [%s] we = %h, wdata = %h \t re = %h, rdata = %2h \t full = %h, empty = %h",
             $realtime, name, we, wdata, re, rdata, full, empty);
     endfunction
 endclass  //transaction
@@ -68,19 +68,40 @@ class driver;
 
     task preset();
         fifo_if.rst = 1;
-        @(posedge fifo_if.w_clk);
-        @(posedge fifo_if.w_clk);
+        fifo_if.we = 0;
+        fifo_if.wdata = 0;
+        fifo_if.re = 0;
+        @(negedge fifo_if.w_clk);
+        @(negedge fifo_if.w_clk);
         fifo_if.rst = 0;
         @(posedge fifo_if.w_clk);
+        //add assertion
+    endtask
+
+    task push();
+        fifo_if.we    = tr.we;
+        fifo_if.wdata = tr.wdata;
+        fifo_if.re    = tr.re;
+    endtask
+
+    task pop();
+        fifo_if.we    = tr.we;
+        fifo_if.wdata = tr.wdata;
+        fifo_if.re    = tr.re;
     endtask
 
     task run();
         forever begin
             gen2drv_mbox.get(tr);
-            @(negedge fifo_if.w_clk);
-            fifo_if.we = tr.we;
-            fifo_if.wdata = tr.wdata;
-            fifo_if.re = tr.re;
+
+            @(posedge fifo_if.w_clk);
+            #1;
+
+            if (tr.we) push();
+            else fifo_if.we = 0;
+            if (tr.re) pop();
+            else fifo_if.re = 0;
+
             tr.display("drv");
         end
     endtask  //run
@@ -100,8 +121,8 @@ class monitor;
 
     task run();
         forever begin
-            @(posedge fifo_if.w_clk);
-            #1;
+            @(negedge fifo_if.w_clk);
+
             tr       = new();
             tr.we    = fifo_if.we;
             tr.re    = fifo_if.re;
@@ -117,12 +138,15 @@ class monitor;
 endclass  //monitor
 
 class scoreboard;
-    transaction            tr;
+    transaction tr;
 
     mailbox #(transaction) mon2scb_mbox;
-    event                  gen_next_ev;
+    event gen_next_ev;
 
-    int                    pass_cnt      = 0, fail_cnt = 0, try_cnt = 0;
+    logic [`BIT_WIDTH-1:0] scb_q[$:`ADDR-1];
+    logic [`BIT_WIDTH-1:0] q_data;
+    int pass_cnt = 0, fail_cnt = 0, try_cnt = 0;
+    int full_cnt, empty_cnt;
 
 
     function new(mailbox#(transaction) mon2scb_mbox, event gen_next_ev);
@@ -136,7 +160,31 @@ class scoreboard;
             mon2scb_mbox.get(tr);
             tr.display("scb");
 
+            if (tr.we && !tr.full) begin
+                //save
+                scb_q.push_front(tr.wdata);
+                $display("scb_push <= %h", tr.wdata);
+            end
 
+            if (tr.re && !tr.empty) begin
+                //pass,fail
+                try_cnt++;
+                q_data = scb_q.pop_back();
+                $display("scb_pop <= %h", q_data);
+                if (q_data == tr.rdata) begin
+                    $display("[Pass]");
+                    pass_cnt++;
+                end else begin
+                    $display(
+                        "[Fail] we = %h, wdata = %h \t re = %h, rdata = %2h \t full = %h, empty = %h \t q_data = %h",
+                        tr.we, tr.wdata, tr.re, tr.rdata, tr.full, tr.empty,
+                        q_data);
+                    fail_cnt++;
+                end
+            end
+
+            if (tr.full) full_cnt++;
+            if (tr.empty) empty_cnt++;
 
             ->gen_next_ev;
         end
@@ -170,7 +218,7 @@ class environment;
     task run();
         drv.preset();
         fork
-            gen.run(100);
+            gen.run(1000);
             drv.run();
             mon.run();
             scb.run();
@@ -185,6 +233,17 @@ class environment;
         $display("  TOTAL     |  Total Trials      |   %3d    ", scb.try_cnt);
         $display("  PASS      |  Success Matches   |   %3d    ", scb.pass_cnt);
         $display("  FAIL      |  Mismatch Errors   |   %3d    ", scb.fail_cnt);
+        $display(
+            "  RATIO     |  Success Rate      |  %6.2f%% ",
+            (scb.try_cnt > 0) ? (real'(scb.pass_cnt) * 100.0 / scb.try_cnt) : 0.0);
+        $display("------------+--------------------+----------");
+        $display("  FULL      |  Full Occurred     |   %3d    ", scb.full_cnt);
+        $display("  EMPTY     |  Empty Occurred    |   %3d    ", scb.empty_cnt);
+        $display("------------+--------------------+----------");
+
+        $display("  QUEUE     |  Data Remained     |   %3d    ",
+                 scb.scb_q.size());
+        $display("  TIME      |  End Time          |  %t", $time);
         $display("============================================");
         $stop;
     endtask  //run
@@ -201,7 +260,7 @@ module tb_fifo ();
 
     environment env;
 
-    fiforegister #(
+    fifo #(
         .ADDR(`ADDR),
         .BIT_WIDTH(`BIT_WIDTH)
     ) DUT (
