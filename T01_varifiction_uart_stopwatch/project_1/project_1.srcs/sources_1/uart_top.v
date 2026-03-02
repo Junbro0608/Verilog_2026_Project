@@ -62,8 +62,8 @@ module uart_rx (
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             c_state        <= IDLE;
-            b_tick_cnt_reg <= 5'b0;
-            bit_cnt_reg    <= 4'b0;
+            b_tick_cnt_reg <= 0;
+            bit_cnt_reg    <= 0;
             done_reg       <= 1'b0;
             buf_reg        <= 8'b0;
         end else begin
@@ -75,39 +75,29 @@ module uart_rx (
         end
     end
 
-    // //move state
-    // always @(*) begin
-    //     n_state = c_state;
-    //     case (c_state)
-    //         // IDLE:  if (b_tick && (rx == 1'b0)) n_state = START;
-    //         // START: if (b_tick && (b_tick_cnt_reg == 7)) n_state = DATA;
-    //         // DATA:  if (b_tick && (bit_cnt_reg == 4'd9)) n_state = STOP;
-    //         // STOP:  if (b_tick && (b_tick_cnt_reg == 5'd16)) n_state = IDLE;
-    //     endcase
-    // end
 
     //next, ouput
     always @(*) begin
-        n_state = c_state;
+        n_state         = c_state;
         b_tick_cnt_next = b_tick_cnt_reg;
-        bit_cnt_next = bit_cnt_reg;
-        done_next = done_reg;
-        buf_next = buf_reg;
+        bit_cnt_next    = bit_cnt_reg;
+        done_next       = done_reg;
+        buf_next        = buf_reg;
         case (c_state)
             IDLE: begin
-                b_tick_cnt_next = 5'b0;
-                bit_cnt_next    = 3'b0;
+                b_tick_cnt_next = 0;
+                bit_cnt_next    = 0;
                 buf_next        = 8'b0;
                 done_next       = 1'b0;
-                if (b_tick & (rx != 1'b1)) begin
+                if (rx != 1'b1) begin
                     n_state = START;
                 end
             end
             START: begin
                 if (b_tick) begin
                     if (b_tick_cnt_reg == 7) begin
-                        bit_cnt_next = bit_cnt_reg + 3'b1;
                         n_state = DATA;
+                        b_tick_cnt_next = 5'b0;
                     end else begin
                         b_tick_cnt_next = b_tick_cnt_reg + 1;
                     end
@@ -115,13 +105,13 @@ module uart_rx (
             end
             DATA: begin
                 if (b_tick) begin
-                    if (b_tick_cnt_reg == 5'd15) begin
-                        b_tick_cnt_next = 5'b0;
+                    if (b_tick_cnt_reg == 15) begin
+                        b_tick_cnt_next = 0;
                         buf_next = {rx, buf_reg[7:1]};
-                        if (bit_cnt_reg != 4'd8)begin
-                            bit_cnt_next = bit_cnt_reg + 3'b1;
-                        end else begin
+                        if (bit_cnt_reg == 7) begin
                             n_state = STOP;
+                        end else begin
+                            bit_cnt_next = bit_cnt_reg + 1;
                         end
                     end else begin
                         b_tick_cnt_next = b_tick_cnt_reg + 1;
@@ -130,9 +120,11 @@ module uart_rx (
             end
             STOP: begin
                 if (b_tick) begin
-                    if (b_tick_cnt_reg == 5'd15) begin
+                    if (b_tick_cnt_reg == 15) begin
                         done_next = 1'b1;
-                        n_state = IDLE;
+                        n_state   = IDLE;
+                        b_tick_cnt_next = 0;
+                        bit_cnt_next    = 0;
                     end else begin
                         b_tick_cnt_next = b_tick_cnt_reg + 1;
                     end
@@ -211,20 +203,9 @@ module uart_tx (
         end
     end
 
-    // next_state CL
-    always @(*) begin
-        next_state = c_state;
-        case (c_state)
-            IDLE: if (tx_start) next_state = START;
-            START: if ((b_tick) && (bt_cnt16_reg == 4'd15)) next_state = DATA;
-            DATA: if ((b_tick) && (bt_cnt16_reg == 4'd15) && (bit_cnt_reg == 3'd7)) next_state = STOP;
-            STOP: if (bt_cnt16_reg == 4'd15) next_state = IDLE;
-            default: next_state = c_state;
-        endcase
-    end
-
     // next_reg CL
     always @(*) begin
+        next_state = c_state;
         tx_next = tx_reg;
         bit_cnt_next = bit_cnt_reg;
         tx_busy_next = tx_busy_reg;
@@ -238,16 +219,24 @@ module uart_tx (
                 tx_busy_next     = 1'b0;
                 tx_done_next     = 1'b0;
                 data_in_buf_next = tx_data;
+                if (tx_start) begin
+                    next_state   = START;
+                    tx_busy_next = 1'b1;
+                end
             end
             START: begin
                 tx_next = 1'b0;
-                tx_busy_next = 1'b1;
+                if ((b_tick) && (bt_cnt16_reg == 4'd15)) next_state = DATA;
             end
             DATA: begin
                 tx_next = data_in_buf_reg[0];
-                if (((b_tick) &&(bt_cnt16_reg == 4'd15)) && (bit_cnt_reg < 3'd7)) begin
-                    bit_cnt_next = bit_cnt_reg + 1;
-                    data_in_buf_next = {1'b0, data_in_buf_reg[7:1]};
+                if ((b_tick) && (bt_cnt16_reg == 4'd15)) begin
+                    if (bit_cnt_reg < 3'd7) begin
+                        bit_cnt_next = bit_cnt_reg + 1;
+                        data_in_buf_next = {1'b0, data_in_buf_reg[7:1]};
+                    end else begin
+                        next_state = STOP;
+                    end
                 end
             end
             STOP: begin
@@ -255,6 +244,7 @@ module uart_tx (
                 bit_cnt_next = 1'b0;
                 if ((b_tick) && (bt_cnt16_reg == 4'd15)) begin
                     tx_done_next = 1'b1;
+                    next_state   = IDLE;
                 end
             end
         endcase

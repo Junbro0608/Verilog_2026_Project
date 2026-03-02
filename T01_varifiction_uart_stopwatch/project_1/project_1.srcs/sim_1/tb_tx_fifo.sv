@@ -3,30 +3,42 @@
 
 
 `timescale 1ns / 1ps
-interface tx_interface (
+`define ADDR 16
+`define BIT_WIDTH 8
+
+interface tx_fifo_interface (
     input clk
 );
     logic       rst;
-    logic       tx_start;
-    logic [7:0] tx_data;
+    //fifo
+    logic       fifo_we;
+    logic [7:0] fifo_wdata;
+    //tx
     logic       tx_busy;
     logic       tx_done;
     logic       uart_tx;
 
-endinterface  //tx_interface
+endinterface  //tx_fifo_interface
 
 class transaction;
-    rand bit [7:0] tx_data;
-    bit            tx_busy;
-    bit            tx_done;
-    bit            uart_tx;
+    bit             rst;
+    //fifo
+    bit             fifo_we;
+    randc bit [7:0] fifo_wdata;
+    //tx
+    bit             tx_busy;
+    bit             tx_done;
+    bit             uart_tx;
 
-    bit      [7:0] pc_data;
+    bit       [7:0] pc_data;
+
+    constraint c_last_three {fifo_wdata inside {18, 146, 223};}
 
     function void display(string name);
         $display(
-            "%t: [%s] tx_data = %h -> uart_tx = %h,tx_done = %h tx_busy = %h, pc_data = %h",
-            $realtime, name, tx_data, uart_tx, tx_done, tx_busy, pc_data);
+            "%t: [%s] fifo_we = %h, fifo_wdata = %h -> uart_tx = %h, tx_done = %h tx_busy = %h, pc_data = %h",
+            $realtime, name, fifo_we, fifo_wdata, uart_tx, tx_done, tx_busy,
+            pc_data);
     endfunction
 endclass  //transaction
 
@@ -36,6 +48,9 @@ class generator;
     mailbox #(transaction) gen2drv_mbox;
     mailbox #(transaction) gen2scb_mbox;
     event gen_next_ev;
+
+    //통계
+    int ascii_history[bit [7:0]];
 
     function new(mailbox#(transaction) gen2drv_mbox,
                  mailbox#(transaction) gen2scb_mbox, event gen_next_ev);
@@ -48,6 +63,9 @@ class generator;
         repeat (run_cnt) begin
             tr = new();
             tr.randomize();
+
+            ascii_history[tr.fifo_wdata]++;
+
             gen2drv_mbox.put(tr);
             gen2scb_mbox.put(tr);
             tr.display("gen");
@@ -61,38 +79,39 @@ class driver;
 
     mailbox #(transaction) gen2drv_mbox;
 
-    virtual tx_interface tx_if;
+    virtual tx_fifo_interface tx_fifo_if;
 
     function new(mailbox#(transaction) gen2drv_mbox,
-                 virtual tx_interface tx_if);
+                 virtual tx_fifo_interface tx_fifo_if);
         this.gen2drv_mbox = gen2drv_mbox;
-        this.tx_if = tx_if;
+        this.tx_fifo_if   = tx_fifo_if;
     endfunction  //new()
 
     task preset();
-        tx_if.rst = 1;
-        @(negedge tx_if.clk);
-        @(negedge tx_if.clk);
-        tx_if.rst = 0;
-        @(posedge tx_if.clk);
+        tx_fifo_if.rst = 1;
+        tx_fifo_if.fifo_we = 0;
+        @(negedge tx_fifo_if.clk);
+        @(negedge tx_fifo_if.clk);
+        tx_fifo_if.rst = 0;
+        @(posedge tx_fifo_if.clk);
         //add assertion
     endtask
 
-    task start();
-        tx_if.tx_start = 1;
+    task push_data();
+        tx_fifo_if.fifo_we = 1;
         #10;
-        tx_if.tx_start = 0;
+        tx_fifo_if.fifo_we = 0;
     endtask
 
     task run();
         forever begin
             //driver
             gen2drv_mbox.get(tr);
-            tx_if.tx_data = tr.tx_data;
+            tx_fifo_if.fifo_wdata = tr.fifo_wdata;
 
 
-            @(negedge tx_if.clk);
-            start();
+            @(negedge tx_fifo_if.clk);
+            push_data();
 
 
             tr.display("drv");
@@ -105,34 +124,40 @@ class monitor;
 
     mailbox #(transaction) mon2scb_mbox;
 
-    virtual tx_interface tx_if;
+    virtual tx_fifo_interface tx_fifo_if;
+
+    int s_time = 0;
 
     parameter BAUD = 9600;
     parameter BAUD_REPIOD = (100_000_000 / BAUD) * 10;  //104_160
+    real add_delay = 1.05;
+    parameter BAUD_DELAY = BAUD_REPIOD * add_delay;
 
     function new(mailbox#(transaction) mon2scb_mbox,
-                 virtual tx_interface tx_if);
+                 virtual tx_fifo_interface tx_fifo_if);
         this.mon2scb_mbox = mon2scb_mbox;
-        this.tx_if = tx_if;
+        this.tx_fifo_if   = tx_fifo_if;
     endfunction  //new()
 
     task run();
         forever begin
-            @(negedge tx_if.uart_tx);
+            @(negedge tx_fifo_if.uart_tx);
             tr = new();
 
+            //check_tx
             #(BAUD_REPIOD / 2);
 
             for (int i = 0; i < 8; i++) begin
                 #(BAUD_REPIOD);
-                tr.pc_data[i] = tx_if.uart_tx;
+                tr.pc_data[i] = tx_fifo_if.uart_tx;
             end
-            @(posedge tx_if.tx_done);
+            @(posedge tx_fifo_if.tx_done);
+            tr.fifo_we = tx_fifo_if.fifo_we;
+            tr.fifo_wdata = tx_fifo_if.fifo_wdata;
 
-            tr.tx_data = tx_if.tx_data;
-            tr.uart_tx = tx_if.uart_tx;
-            tr.tx_busy = tx_if.tx_busy;
-            tr.tx_done = tx_if.tx_done;
+            tr.uart_tx = tx_fifo_if.uart_tx;
+            tr.tx_busy = tx_fifo_if.tx_busy;
+            tr.tx_done = tx_fifo_if.tx_done;
 
             mon2scb_mbox.put(tr);
             tr.display("mon");
@@ -173,13 +198,13 @@ class scoreboard;
 
             //Verification
             try_cnt++;
-            if (tr.pc_data == gen_tr.tx_data) begin
+            if (tr.pc_data == gen_tr.fifo_wdata) begin
                 $display("[Pass]");
                 pass_cnt++;
             end else begin
                 $display(
-                    "[Fail] tx_data = %h ->pc_data = %h, tx_done = %h, tx_busy = %h",
-                    gen_tr.tx_data, tr.pc_data, tr.tx_done, tr.tx_busy);
+                    "[Fail] fifo_wdata = %h ->pc_data = %h, tx_done = %h, tx_busy = %h",
+                    gen_tr.fifo_wdata, tr.pc_data, tr.tx_done, tr.tx_busy);
                 fail_cnt++;
             end
 
@@ -205,20 +230,20 @@ class environment;
     event                  gen_next_ev;
 
 
-    function new(virtual tx_interface tx_if);
+    function new(virtual tx_fifo_interface tx_fifo_if);
         gen2drv_mbox = new();
         mon2scb_mbox = new();
         gen2scb_mbox = new();
         gen = new(gen2drv_mbox, gen2scb_mbox, gen_next_ev);
-        drv = new(gen2drv_mbox, tx_if);
-        mon = new(mon2scb_mbox, tx_if);
+        drv = new(gen2drv_mbox, tx_fifo_if);
+        mon = new(mon2scb_mbox, tx_fifo_if);
         scb = new(mon2scb_mbox, gen2scb_mbox, gen_next_ev);
     endfunction  //new()
 
     task run();
         drv.preset();
         fork
-            gen.run(100);
+            gen.run(10);
             drv.run();
             mon.run();
             scb.run();
@@ -239,36 +264,55 @@ class environment;
         $display("------------+--------------------+----------");
         $display("  TIME      |  End Time          |  %t", $realtime);
         $display("============================================");
+        $display("============================================");
+        $display("--- Generated ASCII Summary ---");
+        $display(gen.ascii_history);
         $stop;
     endtask  //run
 
 endclass  //environment
 
 
-module tb_tx ();
+module tb_tx_fifo ();
     logic clk;
     logic w_b_tick;
+    logic [7:0] fifo_rdata;
+    logic fifo_empty;
 
-    tx_interface tx_if (clk);
+    tx_fifo_interface tx_fifo_if (clk);
 
     environment env;
 
-
     baud_tick U_BAUD_TICK (
         .clk   (clk),
-        .rst   (tx_if.rst),
+        .rst   (tx_fifo_if.rst),
         .b_tick(w_b_tick)
     );
 
-    uart_tx DUT (
+    fifo #(
+        .ADDR(`ADDR),
+        .BIT_WIDTH(`BIT_WIDTH)
+    ) U_FIFO (
+        .w_clk(clk),
+        .r_clk(clk),
+        .rst  (tx_fifo_if.rst),
+        .we   (tx_fifo_if.fifo_we),
+        .wdata(tx_fifo_if.fifo_wdata),
+        .re   (~tx_fifo_if.tx_busy),
+        .rdata(fifo_rdata),
+        .full (),
+        .empty(fifo_empty)
+    );
+
+    uart_tx U_UART_TX (
         .clk     (clk),
-        .rst     (tx_if.rst),
-        .tx_start(tx_if.tx_start),
+        .rst     (tx_fifo_if.rst),
+        .tx_start(~fifo_empty),
         .b_tick  (w_b_tick),
-        .tx_data (tx_if.tx_data),
-        .tx_busy (tx_if.tx_busy),
-        .tx_done (tx_if.tx_done),
-        .uart_tx (tx_if.uart_tx)
+        .tx_data (fifo_rdata),
+        .tx_busy (tx_fifo_if.tx_busy),
+        .tx_done (tx_fifo_if.tx_done),
+        .uart_tx (tx_fifo_if.uart_tx)
     );
 
     always #5 clk = ~clk;
@@ -276,7 +320,7 @@ module tb_tx ();
     initial begin
         $timeformat(-9, 0, "ns");
         clk = 0;
-        env = new(tx_if);
+        env = new(tx_fifo_if);
         env.run();
     end
 endmodule

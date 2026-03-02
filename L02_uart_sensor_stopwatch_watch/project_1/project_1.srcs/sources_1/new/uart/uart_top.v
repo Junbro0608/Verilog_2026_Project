@@ -48,7 +48,7 @@ module uart_rx (
     output       rx_done
 );
 
-    localparam [1:0] IDLE = 2'd0, START = 2'd1, DATA = 3'd2, STOP = 2'd3;
+    localparam [1:0] IDLE = 2'd0, START = 2'd1, DATA = 2'd2, STOP = 2'd3;
     reg [1:0] c_state, n_state;
     reg [4:0] b_tick_cnt_reg, b_tick_cnt_next;
     reg [3:0] bit_cnt_reg, bit_cnt_next;
@@ -96,7 +96,6 @@ module uart_rx (
             START: begin
                 if (b_tick) begin
                     if (b_tick_cnt_reg == 5'd7) begin
-                        buf_next = {rx, buf_reg[7:1]};
                         n_state = DATA;
                         b_tick_cnt_next = 5'b0;
                     end else begin

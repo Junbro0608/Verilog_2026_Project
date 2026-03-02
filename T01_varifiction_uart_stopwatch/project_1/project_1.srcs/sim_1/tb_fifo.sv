@@ -60,6 +60,8 @@ class driver;
 
     virtual fifo_interface fifo_if;
 
+    int cnt;
+
     function new(mailbox#(transaction) gen2drv_mbox,
                  virtual fifo_interface fifo_if);
         this.gen2drv_mbox = gen2drv_mbox;
@@ -79,15 +81,27 @@ class driver;
     endtask
 
     task push();
-        fifo_if.we    = tr.we;
+        fifo_if.we    = 1;
         fifo_if.wdata = tr.wdata;
-        fifo_if.re    = tr.re;
+        fifo_if.re    = 0;
     endtask
 
     task pop();
-        fifo_if.we    = tr.we;
+        fifo_if.we    = 0;
         fifo_if.wdata = tr.wdata;
-        fifo_if.re    = tr.re;
+        fifo_if.re    = 1;
+    endtask
+
+    task push_pop();
+        fifo_if.we    = 1;
+        fifo_if.wdata = tr.wdata;
+        fifo_if.re    = 1;
+    endtask
+
+    task stop();
+        fifo_if.we    = 0;
+        fifo_if.wdata = tr.wdata;
+        fifo_if.re    = 0;
     endtask
 
     task run();
@@ -97,10 +111,14 @@ class driver;
             @(posedge fifo_if.w_clk);
             #1;
 
-            if (tr.we) push();
-            else fifo_if.we = 0;
-            if (tr.re) pop();
-            else fifo_if.re = 0;
+            // if (tr.we) push();
+            // else fifo_if.we = 0;
+            // if (tr.re) pop();
+            // else fifo_if.re = 0;
+            if (cnt < 14) push();
+            else if (cnt == 16)push_pop();
+            else stop();
+            cnt++;
 
             tr.display("drv");
         end
@@ -147,6 +165,7 @@ class scoreboard;
     logic [`BIT_WIDTH-1:0] q_data;
     int pass_cnt = 0, fail_cnt = 0, try_cnt = 0;
     int full_cnt, empty_cnt;
+    int i = 0;
 
 
     function new(mailbox#(transaction) mon2scb_mbox, event gen_next_ev);
@@ -164,6 +183,11 @@ class scoreboard;
                 //save
                 scb_q.push_front(tr.wdata);
                 $display("scb_push <= %h", tr.wdata);
+                $write("q (Hex): [");
+                foreach (scb_q[i]) begin
+                    $write("%h ", scb_q[i]);  // %h는 16진수 출력
+                end
+                $display("]");  // 줄바꿈
             end
 
             if (tr.re && !tr.empty) begin
@@ -171,6 +195,11 @@ class scoreboard;
                 try_cnt++;
                 q_data = scb_q.pop_back();
                 $display("scb_pop <= %h", q_data);
+                $write("q (Hex): [");
+                foreach (scb_q[i]) begin
+                    $write("%h ", scb_q[i]);  // %h는 16진수 출력
+                end
+                $display("]");  // 줄바꿈
                 if (q_data == tr.rdata) begin
                     $display("[Pass]");
                     pass_cnt++;
@@ -240,10 +269,9 @@ class environment;
         $display("  FULL      |  Full Occurred     |   %3d    ", scb.full_cnt);
         $display("  EMPTY     |  Empty Occurred    |   %3d    ", scb.empty_cnt);
         $display("------------+--------------------+----------");
-
         $display("  QUEUE     |  Data Remained     |   %3d    ",
                  scb.scb_q.size());
-        $display("  TIME      |  End Time          |  %t", $time);
+        $display("  TIME      |  End Time          |  %t", $realtime);
         $display("============================================");
         $stop;
     endtask  //run

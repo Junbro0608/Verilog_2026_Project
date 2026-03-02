@@ -121,7 +121,7 @@ module control_unit #(
                     wptr_next  = wptr_reg + 1;
                     empty_next = 1'b0;
                 end
-                if (wptr_next == rptr_next) begin
+                if (wptr_next == rptr_reg) begin
                     full_next = 1'b1;
                 end
             end
