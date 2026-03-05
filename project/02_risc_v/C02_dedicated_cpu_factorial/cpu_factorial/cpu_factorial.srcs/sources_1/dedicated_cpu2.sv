@@ -6,25 +6,28 @@ module dedicated_cpu1 (
     input        rst,
     output [7:0] out
 );
-    logic w_asrc_sel, w_aload, w_out_sel, w_equal;
+    logic w_asrc_sel;
+    logic w_aload, w_sumload, w_out_sel, w_equal;
 
     control_unit U_CTRL_UNIT (
-        .clk       (clk),
-        .rst       (rst),
-        .i_equal   (w_equal),
-        .o_asrc_sel(w_asrc_sel),
-        .o_aload   (w_aload),
-        .o_out_sel (w_out_sel)
+        .clk      (clk),
+        .rst      (rst),
+        .i_equal  (w_equal),
+        .o_src_sel(w_src_sel),
+        .o_aload  (w_aload),
+        .o_sumload(w_sumload),
+        .o_out_sel(w_out_sel)
     );
 
     datapath U_DATAPATH (
-        .clk       (clk),
-        .rst       (rst),
-        .i_asrc_sel(w_asrc_sel),
-        .i_aload   (w_aload),
-        .i_out_sel (w_out_sel),
-        .o_equal   (w_equal),
-        .o_out     (out)
+        .clk      (clk),
+        .rst      (rst),
+        .i_src_sel(w_src_sel),
+        .i_aload  (w_aload),
+        .i_sumload(w_sumload),
+        .i_out_sel(w_out_sel),
+        .o_equal  (w_equal),
+        .o_out    (out)
     );
 
 
@@ -36,8 +39,9 @@ module control_unit (
     input              rst,
     input        [7:0] i_a,
     input              i_equal,
-    output logic       o_asrc_sel,
+    output logic       o_src_sel,
     output logic       o_aload,
+    output logic       o_sumload,
     output logic       o_out_sel
 );
     typedef enum logic [2:0] {
@@ -75,34 +79,40 @@ module control_unit (
     end
 
     always_comb begin : output_comb
-        o_asrc_sel = 0;
-        o_aload    = 0;
-        o_out_sel  = 0;
+        o_src_sel = 0;
+        o_aload   = 0;
+        o_sumload = 0;
+        o_out_sel = 0;
         case (c_state)
             IDLE: begin
-                o_asrc_sel = 0;
-                o_aload    = 0;
-                o_out_sel  = 0;
+                o_src_sel = 1;
+                o_aload   = 1;
+                o_sumload = 1;
+                o_out_sel = 0;
             end
             S1: begin
-                o_asrc_sel = 0;
-                o_aload    = 0;
-                o_out_sel  = 0;
+                o_src_sel = 0;
+                o_aload   = 0;
+                o_sumload = 0;
+                o_out_sel = 0;
             end
             S2: begin
-                o_asrc_sel = 0;
-                o_aload    = 0;
-                o_out_sel  = 1;
+                o_src_sel = 1;
+                o_aload   = 1;
+                o_sumload = 0;
+                o_out_sel = 0;
             end
             S3: begin
-                o_asrc_sel = 1;
-                o_aload    = 1;
-                o_out_sel  = 0;
+                o_src_sel = 1;
+                o_aload   = 0;
+                o_sumload = 1;
+                o_out_sel = 0;
             end
             S4: begin
-                o_asrc_sel = 0;
-                o_aload    = 0;
-                o_out_sel  = 1;
+                o_src_sel = 0;
+                o_aload   = 0;
+                o_sumload = 0;
+                o_out_sel = 1;
             end
         endcase
     end
@@ -114,62 +124,77 @@ endmodule
 module datapath (
     input        clk,
     input        rst,
-    input        i_asrc_sel,
+    input        i_src_sel,
     input        i_aload,
+    input        i_sumload,
     input        i_out_sel,
     output       o_equal,
     output [7:0] o_out
 );
-    logic [7:0] w_alu_out, w_mux_out, w_reg_out;
+    logic [7:0] w_alu_out, w_mux_out, w_a_reg_out,w_sum_reg_out, w_sum_mux_out;
 
-    assign o_out = (i_out_sel) ? w_reg_out : 0;
+    assign o_out = (i_out_sel) ? w_sum_reg_out : 0;
 
-    mux_2x1 U_ASRC_MUX (
+    mux_2x1 U_SRC_MUX (
         .i_a       (8'b0),
         .i_b       (w_alu_out),
-        .i_asrc_sel(i_asrc_sel),
+        .i_asrc_sel(i_src_sel),
         .o_mux_out (w_mux_out)
     );
 
-    areg U_AREG (
+    register U_AREG (
         .clk      (clk),
         .rst      (rst),
         .i_reg_in (w_mux_out),
-        .i_aload  (i_aload),
-        .o_reg_out(w_reg_out)
+        .i_load   (i_aload),
+        .o_reg_out(w_a_reg_out)
+    );
+    register U_SUMREG (
+        .clk      (clk),
+        .rst      (rst),
+        .i_reg_in (w_mux_out),
+        .i_load   (i_sumload),
+        .o_reg_out(w_sum_reg_out)
+    );
+
+    mux_2x1 U_SUM_MUX (
+        .i_a       (8'b1),
+        .i_b       (w_sum_reg_out),
+        .i_asrc_sel(i_sumload),
+        .o_mux_out (w_sum_mux_out)
     );
 
     alu U_ALU (
-        .i_a      (w_reg_out),
-        .i_b      (8'h1),
+        .i_a      (w_a_reg_out),
+        .i_b      (w_sum_mux_out),
         .o_alu_out(w_alu_out)
     );
 
     lt10_compa U_10_COMP (
-        .i_data (w_reg_out),
+        .i_data (w_a_reg_out),
         .o_equal(o_equal)
     );
 
 endmodule
 
 
-module areg (
+module register (
     input        clk,
     input        rst,
     input  [7:0] i_reg_in,
-    input        i_aload,
+    input        i_load,
     output [7:0] o_reg_out
 );
-    logic [7:0] areg;
+    logic [7:0] mem;
 
-    assign o_reg_out = areg;
+    assign o_reg_out = mem;
 
     always_ff @(posedge clk or posedge rst) begin : areg_ff
         if (rst) begin
-            areg <= 0;
+            mem <= 0;
         end else begin
-            if (i_aload) begin
-                areg <= i_reg_in;
+            if (i_load) begin
+                mem <= i_reg_in;
             end
         end
     end
@@ -203,3 +228,5 @@ module lt10_compa (
 );
     assign o_equal = (i_data == 10);
 endmodule
+
+

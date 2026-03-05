@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_dedicated_cpu_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_dedicated_cpu" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="420001fs"></ZoomEndTime>
+      <Cursor1Time time="335000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="242"></NameColumnWidth>
+      <ValueColumnWidth column_width="110"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="17" />
+   <wvobject fp_name="/tb_dedicated_cpu/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/out" type="array">
+      <obj_property name="ElementShortName">out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">out[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/i_equal" type="logic">
+      <obj_property name="ElementShortName">i_equal</obj_property>
+      <obj_property name="ObjectShortName">i_equal</obj_property>
+   </wvobject>
+   <wvobject fp_name="group34" type="group">
+      <obj_property name="label">DATA_PATH</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/i_src_sel" type="logic">
+         <obj_property name="ElementShortName">i_src_sel</obj_property>
+         <obj_property name="ObjectShortName">i_src_sel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/i_aload" type="logic">
+         <obj_property name="ElementShortName">i_aload</obj_property>
+         <obj_property name="ObjectShortName">i_aload</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/i_sumload" type="logic">
+         <obj_property name="ElementShortName">i_sumload</obj_property>
+         <obj_property name="ObjectShortName">i_sumload</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/i_out_sel" type="logic">
+         <obj_property name="ElementShortName">i_out_sel</obj_property>
+         <obj_property name="ObjectShortName">i_out_sel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/o_equal" type="logic">
+         <obj_property name="ElementShortName">o_equal</obj_property>
+         <obj_property name="ObjectShortName">o_equal</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/o_out" type="array">
+         <obj_property name="ElementShortName">o_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_mux_out" type="array">
+         <obj_property name="ElementShortName">w_mux_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_mux_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_alu_out" type="array">
+         <obj_property name="ElementShortName">w_alu_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_alu_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_sum_mux_out" type="array">
+         <obj_property name="ElementShortName">w_sum_mux_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_sum_mux_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_a_reg_out" type="array">
+         <obj_property name="ElementShortName">w_a_reg_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_a_reg_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_sum_reg_out" type="array">
+         <obj_property name="ElementShortName">w_sum_reg_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_sum_reg_out[7:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/o_src_sel" type="logic">
+      <obj_property name="ElementShortName">o_src_sel</obj_property>
+      <obj_property name="ObjectShortName">o_src_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/o_aload" type="logic">
+      <obj_property name="ElementShortName">o_aload</obj_property>
+      <obj_property name="ObjectShortName">o_aload</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/o_sumload" type="logic">
+      <obj_property name="ElementShortName">o_sumload</obj_property>
+      <obj_property name="ObjectShortName">o_sumload</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/o_out_sel" type="logic">
+      <obj_property name="ElementShortName">o_out_sel</obj_property>
+      <obj_property name="ObjectShortName">o_out_sel</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/c_state" type="array">
+      <obj_property name="ElementShortName">c_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">c_state[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/o_out" type="array">
+      <obj_property name="ElementShortName">o_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">o_out[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="group57" type="group">
+      <obj_property name="label">SRC_MUX</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_mux_out" type="array">
+         <obj_property name="ElementShortName">w_mux_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_mux_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group61" type="group">
+      <obj_property name="label">A_REG</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_a_reg_out" type="array">
+         <obj_property name="ElementShortName">w_a_reg_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_a_reg_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group59" type="group">
+      <obj_property name="label">SUM_REG</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_sum_reg_out" type="array">
+         <obj_property name="ElementShortName">w_sum_reg_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_sum_reg_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group60" type="group">
+      <obj_property name="label">SUM_MUX</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_sum_mux_out" type="array">
+         <obj_property name="ElementShortName">w_sum_mux_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_sum_mux_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group58" type="group">
+      <obj_property name="label">ALU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_alu_out" type="array">
+         <obj_property name="ElementShortName">w_alu_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_alu_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
