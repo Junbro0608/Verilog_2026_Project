@@ -6,7 +6,7 @@ module tb_dedicated_cpu ();
     logic clk, rst;
     logic [7:0] out;
 
-    dedicated_cpu3 U_DUT (
+    dedicated_cpu4 U_DUT (
         .clk(clk),
         .rst(rst),
         .out(out)

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_dedicated_cpu_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_dedicated_cpu" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="420000fs"></ZoomEndTime>
+      <Cursor1Time time="105000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="181"></NameColumnWidth>
+      <ValueColumnWidth column_width="84"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="7" />
+   <wvobject fp_name="/tb_dedicated_cpu/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/out" type="array">
+      <obj_property name="ElementShortName">out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">out[7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="group21" type="group">
+      <obj_property name="label">CTRL_UNIT</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/i_equal" type="logic">
+         <obj_property name="ElementShortName">i_equal</obj_property>
+         <obj_property name="ObjectShortName">i_equal</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/c_state" type="array">
+         <obj_property name="ElementShortName">c_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">c_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/rfsrc_sel" type="logic">
+         <obj_property name="ElementShortName">rfsrc_sel</obj_property>
+         <obj_property name="ObjectShortName">rfsrc_sel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/raddr0" type="array">
+         <obj_property name="ElementShortName">raddr0[1:0]</obj_property>
+         <obj_property name="ObjectShortName">raddr0[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/raddr1" type="array">
+         <obj_property name="ElementShortName">raddr1[1:0]</obj_property>
+         <obj_property name="ObjectShortName">raddr1[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/waddr" type="array">
+         <obj_property name="ElementShortName">waddr[1:0]</obj_property>
+         <obj_property name="ObjectShortName">waddr[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/we" type="logic">
+         <obj_property name="ElementShortName">we</obj_property>
+         <obj_property name="ObjectShortName">we</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group35" type="group">
+      <obj_property name="label">DATA_PATH</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/o_out" type="array">
+         <obj_property name="ElementShortName">o_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">o_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_reg_mux_out" type="array">
+         <obj_property name="ElementShortName">w_reg_mux_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_reg_mux_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/w_alu_out" type="array">
+         <obj_property name="ElementShortName">w_alu_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">w_alu_out[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/o_equal" type="logic">
+         <obj_property name="ElementShortName">o_equal</obj_property>
+         <obj_property name="ObjectShortName">o_equal</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/rfsrc_sel" type="logic">
+         <obj_property name="ElementShortName">rfsrc_sel</obj_property>
+         <obj_property name="ObjectShortName">rfsrc_sel</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/we" type="logic">
+         <obj_property name="ElementShortName">we</obj_property>
+         <obj_property name="ObjectShortName">we</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/waddr" type="array">
+         <obj_property name="ElementShortName">waddr[1:0]</obj_property>
+         <obj_property name="ObjectShortName">waddr[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/raddr0" type="array">
+         <obj_property name="ElementShortName">raddr0[1:0]</obj_property>
+         <obj_property name="ObjectShortName">raddr0[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/rd0" type="array">
+         <obj_property name="ElementShortName">rd0[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rd0[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/raddr1" type="array">
+         <obj_property name="ElementShortName">raddr1[1:0]</obj_property>
+         <obj_property name="ObjectShortName">raddr1[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/rd1" type="array">
+         <obj_property name="ElementShortName">rd1[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rd1[7:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_DATAPATH/U_register/mem" type="array">
+      <obj_property name="ElementShortName">mem[0:3][7:0]</obj_property>
+      <obj_property name="ObjectShortName">mem[0:3][7:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_dedicated_cpu/U_DUT/U_CTRL_UNIT/c_state" type="array">
+      <obj_property name="ElementShortName">c_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">c_state[2:0]</obj_property>
+   </wvobject>
+</wave_config>
