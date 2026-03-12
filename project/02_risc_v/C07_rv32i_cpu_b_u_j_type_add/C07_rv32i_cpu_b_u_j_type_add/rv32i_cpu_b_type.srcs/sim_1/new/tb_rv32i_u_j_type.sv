@@ -26,7 +26,7 @@ module tb_rv32i_u_j_type ();
         rst = 1;
         //REG
         for (i = 0; i < 32; i = i + 1) begin
-            `REG_FILE.reg_file[i] = i;
+            `REG_FILE.reg_file[i] = 1;
         end
         //DMEM
         for (i = 1; i < 32; i = i + 1) begin
@@ -52,23 +52,31 @@ module tb_rv32i_u_j_type ();
         // `REG_FILE.reg_file[1] = -200;
 
         /*
+        U-type
+        [0] LUI     rd = imm                    x1 = 10
+        [1] LUI     rd = imm                    x1 = -10
+        [2] AUIPC   rd = PC + imm               x1 = 4*2 + 10
+        j-type
+        [3] JAL     rd = PC+4; PC += imm        x2 = 4*3 + 4; PC = 3*4 + 4*2
+        [5] JALR    rd = PC+4; PC = rs1 + imm   X2 = 4*5 + 4; PC = x2(4*4) + 4*5
+        [9] SUB     rd = rs1 - rs2              X3 = x1(18) - x2(24)
         */
         //PC  
         //
-        imm_21 = 21'd10;
+        imm_21 = 21'd8;
         if (1) begin
-        $display("%b",{imm_21[20],imm_21[10:1],imm_21[11],imm_21[19:12]});
         //LUI
         `INSTR_MEM.rom[0] = {32'd10, 5'd1, `LUI_TYPE};
-        `INSTR_MEM.rom[1] = {-10, 5'd2, `LUI_TYPE};
+        `INSTR_MEM.rom[1] = {-10, 5'd1, `LUI_TYPE};
         //AUIPC
         `INSTR_MEM.rom[2] = {10,5'd1,`AUIPC_TYPE};
         end
         if (1) begin
         //JAL
-        `INSTR_MEM.rom[2] = {imm_21[20],imm_21[10:1],imm_21[11],imm_21[19:12],5'd3,`JAL_TYPE};
+        `INSTR_MEM.rom[3] = {imm_21[20],imm_21[10:1],imm_21[11],imm_21[19:12],5'd2,`JAL_TYPE};
         // //JALR
-        // `INSTR_MEM.rom[2] = {-100,5'd3,`JALR_TYPE};
+        `INSTR_MEM.rom[5] = {20,5'd2,3'b0,5'd2,`JALR_TYPE};
+        `INSTR_MEM.rom[9] = {`FNC7_SUB,5'd2,5'd1,`FNC3_ADD_SUB,5'd3,`R_TYPE};
         end
 
 

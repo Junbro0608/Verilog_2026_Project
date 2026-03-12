@@ -14,7 +14,7 @@ module rv32i_cpu (
     output logic [31:0] dwdata,
     output logic [ 2:0] o_funct3
 );
-    logic rf_we, alu_src_sel, branch;
+    logic rf_we, alu_src_sel, b_src_sel, branch;
     logic [2:0] rf_wd_sel;
     alu_control_t alu_control;
 
@@ -28,8 +28,9 @@ module rv32i_cpu (
         .rf_we      (rf_we),
         .alu_src_sel(alu_src_sel),
         .rf_wd_sel  (rf_wd_sel),
-        .branch     (branch),
         .alu_control(alu_control),
+        .b_src_sel  (b_src_sel),
+        .branch     (branch),
         //data_mem
         .o_funct3   (o_funct3),
         .dwe        (dwe)

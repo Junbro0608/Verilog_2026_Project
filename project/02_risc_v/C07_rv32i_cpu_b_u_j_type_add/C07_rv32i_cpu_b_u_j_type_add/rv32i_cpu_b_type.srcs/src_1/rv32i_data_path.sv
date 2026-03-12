@@ -12,7 +12,8 @@ module data_path #(
     input                                  alu_src_sel,
     input                [            2:0] rf_wd_sel,
     input  alu_control_t                   alu_control,
-    input  logic                           branch,
+    input                                  b_src_sel,
+    input                                  branch,
     //instr
     input                [           31:0] instr_data,
     output logic         [           31:0] instr_addr,
@@ -21,13 +22,14 @@ module data_path #(
     output logic         [BIT_WIDTH - 1:0] daddr,
     output logic         [BIT_WIDTH - 1:0] dwdata
 );
-    logic [BIT_WIDTH-1:0] rf_wd_mux_data;
+    logic [BIT_WIDTH-1:0] rf_wd_mux_out;
     logic [BIT_WIDTH-1:0] rd1, rd2;
     logic [BIT_WIDTH-1:0] imm_data;
-    logic [BIT_WIDTH-1:0] alu_src2_mux_data;
+    logic [BIT_WIDTH-1:0] alu_src2_mux_out;
     logic [BIT_WIDTH-1:0] alu_result;
+    logic [BIT_WIDTH-1:0] b_src_mux_out;
     logic                 b_taken;
-    logic [BIT_WIDTH-1:0] pc_src_mux_data;
+    logic [BIT_WIDTH-1:0] pc_src_mux_out;
 
     assign daddr  = alu_result;
     assign dwdata = rd2;
@@ -40,7 +42,7 @@ module data_path #(
         .in3    (instr_addr + imm_data),  //AUIPC
         .in4    (instr_addr + 4),         //JAL
         .mux_sel(rf_wd_sel),
-        .mux_out(rf_wd_mux_data)
+        .mux_out(rf_wd_mux_out)
     );
 
     register_file #(
@@ -52,7 +54,7 @@ module data_path #(
         .rf_we(rf_we),
         //write
         .wa   (instr_data[11:7]),
-        .wd   (rf_wd_mux_data),
+        .wd   (rf_wd_mux_out),
         //read
         .ra1  (instr_data[19:15]),
         .ra2  (instr_data[24:20]),
@@ -70,29 +72,36 @@ module data_path #(
         .in0    (rd2),
         .in1    (imm_data),
         .mux_sel(alu_src_sel),
-        .mux_out(alu_src2_mux_data)
+        .mux_out(alu_src2_mux_out)
     );
 
     alu U_ALU (
         .a          (rd1),
-        .b          (alu_src2_mux_data),
+        .b          (alu_src2_mux_out),
         .alu_control(alu_control),
         .alu_result (alu_result),
         .b_taken    (b_taken)
     );
 
     //PC-----------------------------------------
-    mux_2x1 U_PC_SRC_MUX (
-        .in0    (instr_addr + 4),         //PC+4
-        .in1    (instr_addr + imm_data),  //PC+imm
-        .mux_sel(b_taken && branch),      //sel
-        .mux_out(pc_src_mux_data)         //mux_out
+    mux_2x1 U_PC_B_SRC_MUX (
+        .in0    (instr_addr + imm_data),
+        .in1    (alu_result),
+        .mux_sel(b_src_sel),
+        .mux_out(b_src_mux_out)
+    );
+
+    mux_2x1 U_PC_B_MUX (
+        .in0    (instr_addr + 4),     //PC+4
+        .in1    (b_src_mux_out),      //PC+imm
+        .mux_sel(b_taken && branch),  //sel
+        .mux_out(pc_src_mux_out)      //mux_out
     );
 
     pc U_PC (
         .clk (clk),
         .rst (rst),
-        .i_pc(pc_src_mux_data),
+        .i_pc(pc_src_mux_out),
         .o_pc(instr_addr)
     );
 endmodule
