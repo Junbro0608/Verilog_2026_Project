@@ -118,7 +118,7 @@ module control_unit (
                 alu_control = ADD;
                 //pc
                 b_src_sel   = 0;
-                branch      = 1;
+                branch      = 0;
                 //data_mem
                 o_funct3    = 3'b000;
                 dwe         = 0;
