@@ -1,12 +1,13 @@
 `timescale 1ns / 1ps
 //multi_cycle CPU + interrupt I/O
-interface apb_if;
+interface apb_if();
     logic [31:0] PRDATA;
     logic        PSEL;
     logic        PREADY;
 
     // Slave I/O
-    modport slave_io(input PRDATA, PREADY, output PSEL);
+    modport master_io(input PRDATA, PREADY, output PSEL);
+    modport slave_io(input PSEL, output PRDATA, PREADY);
 endinterface
 
 module rv32I_mcu (
@@ -17,12 +18,17 @@ module rv32I_mcu (
     logic bus_wreq, bus_rreq, ready;
     logic [31:0] bus_addr, bus_wdata, bus_rdata;
     logic [2:0] o_funct3;
-    apb_if slv_RAM ();
-    apb_if slv_GPO ();
-    apb_if slv_GPI ();
-    apb_if slv_GPIO ();
-    apb_if slv_FND ();
-    apb_if slv_UART ();
+    logic PENABLE, PWRITE;
+    logic [31:0] PADDR, PWDATA;
+
+
+    apb_if
+        slv_RAM (),
+        slv_GPO (),
+        slv_GPI (),
+        slv_GPIO (),
+        slv_FND (),
+        slv_UART ();
 
     instruction_mem U_INSTR_MEM (
         .instr_addr(instr_addr[31:2]),
@@ -38,7 +44,7 @@ module rv32I_mcu (
 
     apb_master U_APB_MASTER (
         .PCLK    (clk),
-        .PRESETn (rst),
+        .PRESET  (rst),
         //Soc Internal signal with CPU
         .addr    (bus_addr),
         .Wdata   (bus_wdata),
@@ -49,10 +55,10 @@ module rv32I_mcu (
         .Rdata   (bus_rdata),
         .ready   (ready),
         //output -> salve
-        .PADDR   (),
-        .PWDATA  (),
-        .PENABLE (),
-        .PWRITE  (),
+        .PADDR   (PADDR),
+        .PWDATA  (PWDATA),
+        .PENABLE (PENABLE),
+        .PWRITE  (PWRITE),
         .slv_RAM (slv_RAM),
         .slv_GPO (slv_GPO),
         .slv_GPI (slv_GPI),
@@ -60,6 +66,15 @@ module rv32I_mcu (
         .slv_FND (slv_FND),
         .slv_UART(slv_UART)
     );
+
+    apb_slave_ram U_SLV_RAM (
+        .PCLK  (clk),
+        //cpu
+        .funct3(o_funct3),
+        //APB_bus
+        .*
+    );
+
 
 
 endmodule

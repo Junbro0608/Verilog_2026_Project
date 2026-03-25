@@ -1,38 +1,35 @@
 `timescale 1ns / 1ps
 
-
-
-
 //0x0000_0000 ~ 0x0000_0FFF ROM
 //0x1000_0000 ~ 0x1000_0FFF RAM
 //0x2000_0000 ~ 0x2000_4FFF IO
 
 module apb_master (
-    input                         PCLK,
-    input                         PRESETn,
+    input                          PCLK,
+    input                          PRESET,
     //Soc Internal signal with CPU
-    input                  [31:0] addr,
-    input                  [31:0] Wdata,
-    input                         Wreq,
-    input                         Rreq,
+    input                   [31:0] addr,
+    input                   [31:0] Wdata,
+    input                          Wreq,
+    input                          Rreq,
     //APB Interface
     // output logic                  slvERR,
-    output logic           [31:0] Rdata,
-    output logic                  ready,
+    output logic            [31:0] Rdata,
+    output logic                   ready,
     //output -> salve
-    output logic           [31:0] PADDR,
-    output logic           [31:0] PWDATA,
-    output logic                  PENABLE,
-    output logic                  PWRITE,
-           apb_if.slave_io        slv_RAM,
-           apb_if.slave_io        slv_GPO,
-           apb_if.slave_io        slv_GPI,
-           apb_if.slave_io        slv_GPIO,
-           apb_if.slave_io        slv_FND,
-           apb_if.slave_io        slv_UART
+    output logic            [31:0] PADDR,
+    output logic            [31:0] PWDATA,
+    output logic                   PENABLE,
+    output logic                   PWRITE,
+           apb_if.master_io        slv_RAM,
+           apb_if.master_io        slv_GPO,
+           apb_if.master_io        slv_GPI,
+           apb_if.master_io        slv_GPIO,
+           apb_if.master_io        slv_FND,
+           apb_if.master_io        slv_UART
 );
     logic [31:0] PADDR_next, PWDATA_next;
-    logic transfer, decode_en, PWRITE_next;
+    logic decode_en, PWRITE_next;
 
     typedef enum logic [1:0] {
         IDLE,
@@ -41,8 +38,8 @@ module apb_master (
     } state_t;
     state_t c_state, n_state;
 
-    always_ff @(posedge PCLK or negedge PRESETn) begin : apb_dec_ff
-        if (!PRESETn) begin
+    always_ff @(posedge PCLK or posedge PRESET) begin : apb_dec_ff
+        if (PRESET) begin
             c_state <= IDLE;
             PADDR   <= 0;
             PWDATA  <= 0;
@@ -58,26 +55,21 @@ module apb_master (
     always_comb begin : apb_dec_state_comb
         n_state = c_state;
         case (c_state)
-            IDLE: if (transfer) n_state = SETUP;
+            IDLE: if (Wreq || Rreq) n_state = SETUP;
             SETUP: begin
                 n_state = ACCESS;
             end
             ACCESS: begin
-                case (addr[31:28])
-                    0: begin
-                        if (ready) begin
-                            n_state = IDLE;
-                            // if (transfer) n_state = SETUP;
-                            // else n_state = IDLE;
-                        end
-                    end
-                endcase
+                if (ready) begin
+                    n_state = IDLE;
+                    // if (transfer) n_state = SETUP;
+                    // else n_state = IDLE;
+                end
             end
         endcase
     end
 
     always_comb begin : apb_dec_output_comb
-        transfer    = Wreq || Rreq;
         decode_en   = 0;
         PENABLE     = 0;
         PWRITE_next = PWRITE;
@@ -86,12 +78,18 @@ module apb_master (
         case (c_state)
             IDLE: begin
                 decode_en   = 0;
-                PADDR_next  = addr;
-                PWDATA_next = Wdata;
-                if (Wreq) begin
-                    PWRITE_next = 1'b1;
-                end else begin
-                    PWRITE_next = 1'b0;
+                PENABLE     = 0;
+                PWRITE_next = 0;
+                PADDR_next  = 0;
+                PWDATA_next = 0;
+                if (Wreq || Rreq) begin
+                    PADDR_next  = addr;
+                    PWDATA_next = Wdata;
+                    if (Wreq) begin
+                        PWRITE_next = 1'b1;
+                    end else begin
+                        PWRITE_next = 1'b0;
+                    end
                 end
             end
             SETUP: begin
@@ -101,12 +99,15 @@ module apb_master (
             ACCESS: begin
                 decode_en = 1;
                 PENABLE   = 1;
+                if (ready) begin
+                    PWDATA_next = 0;
+                end
             end
         endcase
     end
 
     addr_decoder U_ADDR_DEC (
-        .addr(addr),
+        .addr(PADDR),
         .decode_en(decode_en),
         .PSEL0(slv_RAM.PSEL),
         .PSEL1(slv_GPO.PSEL),
@@ -133,7 +134,7 @@ module apb_master (
         .PREADY3(slv_GPIO.PREADY),
         .PREADY4(slv_FND.PREADY),
         .PREADY5(slv_UART.PREADY),
-        .sel    (addr),
+        .sel    (PADDR),
         //output
         .Rdata  (Rdata),
         .ready  (ready)

@@ -166,11 +166,11 @@ module control_unit (
             MEM: begin
                 o_funct3 = funct3;
                 if (opcode == S_type) dwe = 1;
+                if (opcode == IL_type) dre = 1;
             end
             WB: begin
                 rf_we = 1;
                 rf_wd_sel = 1;
-                dre = 1;
             end
         endcase
     end

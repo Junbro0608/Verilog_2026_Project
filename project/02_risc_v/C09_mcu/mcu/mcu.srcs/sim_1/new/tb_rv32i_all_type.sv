@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-`include "../../src_1/rv32i_opcode.svh"
+`include "../../src_1/cpu/rv32i_opcode.svh"
 
 `define HEX_CODE 1
 `define R   0
@@ -28,7 +28,7 @@ module tb_rv32i_all_type ();
 
     integer i,j;
 
-    rv32I_top U_DUT (
+    rv32I_mcu U_DUT (
         .clk(clk),
         .rst(rst)
     );
@@ -139,7 +139,7 @@ module tb_rv32i_all_type ();
         if(`HEX_CODE) begin
             reset(0);
             $display("[Test HEX_CODE]");
-            $readmemh("riscv_rv32i_rom.mem",`INSTR_MEM.rom);
+            $readmemh("test_rom.mem",`INSTR_MEM.rom);
 
             run(520);    
         end

@@ -10,7 +10,7 @@
 //mem_path
 `define REG_FILE U_DUT.U_CPU.U_DATA_PATH.U_DEC_PATH.U_REG_FILE
 `define INSTR_MEM U_DUT.U_INSTR_MEM
-`define DMEM U_DUT.U_DATA_MEM
+`define DMEM U_DUT.U_SLV_RAM.U_RAM
 
 //opcode
 `define R_TYPE      7'b011_0011

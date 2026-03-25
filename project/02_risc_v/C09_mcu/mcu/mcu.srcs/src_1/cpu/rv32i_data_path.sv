@@ -127,6 +127,8 @@ module pc (
 );
 
     logic [31:0] pc_reg, pc_next;
+    //output
+    assign o_pc = pc_reg;
     //branch_event
     assign j_event = b_taken && branch;
 
@@ -134,13 +136,13 @@ module pc (
         if (rst) begin
             pc_reg <= 0;
         end else begin
+            if(pc_en)
             pc_reg <= pc_next;
         end
     end
 
+
     always_comb begin : pc_comb
-        //output
-        if (pc_en) o_pc = pc_reg;
         //mux   
         pc_next = pc_reg;
         case ({

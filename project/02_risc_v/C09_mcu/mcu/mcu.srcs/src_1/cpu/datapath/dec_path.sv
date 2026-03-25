@@ -6,7 +6,6 @@ module dec_path (
     input               i_rst,
     //ctrl_unit
     input               i_cu_rf_we,
-    input               i_cu_alu_src_sel,
     //IF
     input        [31:0] i_if_instr_data,
     //ID
@@ -115,7 +114,7 @@ module imm_extender (
                 };
             end
             LUI_type, AUIPC_type: begin
-                imm_data = {{12{instr_data[31]}}, instr_data[31:12]};
+                imm_data = {instr_data[31:12],{12{1'b0}}};
             end
             JAL_type: begin
                 imm_data = {
