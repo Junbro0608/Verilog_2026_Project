@@ -9,7 +9,7 @@ module instruction_mem (
     logic [31:0] rom[0:127];
 
     initial begin
-        //$readmemh("../dion_game_rom.mem");
+       // $readmemh("../../sim_1/new/test_rom.mem");
     end
 
     assign instr_data = rom[instr_addr];

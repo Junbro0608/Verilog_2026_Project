@@ -2,7 +2,7 @@
 
 //0x0000_0000 ~ 0x0000_0FFF ROM
 //0x1000_0000 ~ 0x1000_0FFF RAM
-//0x2000_0000 ~ 0x2000_4FFF IO
+//0x2000_0000 ~ 0x2000_4FFF GPO
 
 module apb_master (
     input                          PCLK,

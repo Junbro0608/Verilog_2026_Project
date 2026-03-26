@@ -1,15 +1,15 @@
 `timescale 1ns / 1ps
-`include "./cpu/rv32i_opcode.svh"
+`include "../cpu/rv32i_opcode.svh"
 
-module apb_slave_ram (
-    input                        PCLK,
+module apb_slave_dram (
+    input                             PCLK,
     //cpu
-    input                 [ 2:0] funct3,
+    input                      [ 2:0] funct3,
     //APB_bus
-    input                 [31:0] PADDR,
-    input                 [31:0] PWDATA,
-    input                        PWRITE,
-    input                        PENABLE,
+    input                      [31:0] PADDR,
+    input                      [31:0] PWDATA,
+    input                             PWRITE,
+    input                             PENABLE,
           apb_if.slave_io        slv_RAM
 );
 
@@ -19,9 +19,9 @@ module apb_slave_ram (
         .clk     (PCLK),
         //control_unit
         .i_funct3(funct3),
-        .dwe     (PREADY && PWRITE),
+        .dwe     (slv_RAM.PREADY && PWRITE),
         //write
-        .daddr   (PADDR),
+        .daddr   ({4'b0, PADDR[27:0]}),
         .dwdata  (PWDATA),
         //read
         .drdata  (slv_RAM.PRDATA)

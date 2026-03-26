@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //multi_cycle CPU + interrupt I/O
-interface apb_if();
+interface apb_if;
     logic [31:0] PRDATA;
     logic        PSEL;
     logic        PREADY;
@@ -11,8 +11,11 @@ interface apb_if();
 endinterface
 
 module rv32I_mcu (
-    input clk,
-    input rst
+    input         clk,
+    input         rst,
+    //IO
+    input  [15:0] sw,
+    output [15:0] led
 );
     logic [31:0] instr_addr, instr_data;
     logic bus_wreq, bus_rreq, ready;
@@ -67,7 +70,7 @@ module rv32I_mcu (
         .slv_UART(slv_UART)
     );
 
-    apb_slave_ram U_SLV_RAM (
+    apb_slave_dram U_SLV_DRAM (
         .PCLK  (clk),
         //cpu
         .funct3(o_funct3),
@@ -75,6 +78,22 @@ module rv32I_mcu (
         .*
     );
 
+    apb_slave_gpo U_SLV_GPO (
+        .PCLK  (clk),
+        .PRESET(rst),
+        //APB_bus
+        .*,
+        //output
+        .GPO_out   (led)
+    );
 
+    apb_slave_gpi U_SLV_GPI (
+        .PCLK  (clk),
+        .PRESET(rst),
+        //APB_bus
+        .*,
+        //input
+        .GPI_in(sw)
+    );
 
 endmodule
