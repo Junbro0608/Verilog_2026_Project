@@ -6,10 +6,10 @@ module instruction_mem (
     output logic [31:0] instr_data
 );
 
-    logic [31:0] rom[0:127];
+    logic [31:0] rom[0:255];
 
     initial begin
-       // $readmemh("../../sim_1/new/test_rom.mem");
+        $readmemh("apb_gpio_led_black.mem",rom);
     end
 
     assign instr_data = rom[instr_addr];

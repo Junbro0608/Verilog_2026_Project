@@ -13,7 +13,7 @@ module data_mem (
     output logic [31:0] drdata
 );
 
-    logic [31:0] dmem[0:255];
+    logic [31:0] dmem[0:1023];
 
 
     //S_type

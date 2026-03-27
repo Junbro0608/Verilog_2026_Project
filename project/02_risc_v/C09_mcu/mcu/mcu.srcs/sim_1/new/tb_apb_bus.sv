@@ -1,14 +1,5 @@
 `timescale 1ns / 1ps
 
-interface apb_if;
-    logic [31:0] PRDATA;
-    logic        PSEL;
-    logic        PREADY;
-
-    // Slave I/O
-    modport master_io(input PRDATA, PREADY, output PSEL);
-    modport slave_io(input PSEL, output PRDATA, PREADY);
-endinterface
 
 module tb_apb_bus ();
 

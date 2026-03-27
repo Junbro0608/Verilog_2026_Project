@@ -14,8 +14,12 @@ module rv32I_mcu (
     input         clk,
     input         rst,
     //IO
-    input  [15:0] sw,
-    output [15:0] led
+    input  [ 7:0] gpi,
+    output [ 7:0] gpo,
+    inout  [15:0] gpio,
+    //FND
+    output [ 7:0] fnd_data,
+    output [ 3:0] fnd_digit
 );
     logic [31:0] instr_addr, instr_data;
     logic bus_wreq, bus_rreq, ready;
@@ -23,6 +27,7 @@ module rv32I_mcu (
     logic [2:0] o_funct3;
     logic PENABLE, PWRITE;
     logic [31:0] PADDR, PWDATA;
+    logic [7:0] FND_slv_data;
 
 
     apb_if
@@ -84,7 +89,7 @@ module rv32I_mcu (
         //APB_bus
         .*,
         //output
-        .GPO_out   (led)
+        .GPO_out   (gpo)
     );
 
     apb_slave_gpi U_SLV_GPI (
@@ -93,7 +98,33 @@ module rv32I_mcu (
         //APB_bus
         .*,
         //input
-        .GPI_in(sw)
+        .GPI_in(gpi)
+    );
+
+    apb_slave_GPIO U_SLV_GPIO (
+        .PCLK   (clk),
+        .PRESET (rst),
+        //APB_bus
+        .*,
+        //inout
+        .GPIO_io(gpio)
+    );
+
+    apb_slave_FND U_SLV_FND (
+        .PCLK   (clk),
+        .PRESET (rst),
+        //APB_bus
+        .*,
+        //output
+        .FND_slv_data(FND_slv_data)
+    );
+
+    fnd_controller U_FND (
+        .clk      (clk),
+        .reset    (rst),
+        .d_in     (FND_slv_data),
+        .fnd_data (fnd_data),
+        .fnd_digit(fnd_digit)
     );
 
 endmodule

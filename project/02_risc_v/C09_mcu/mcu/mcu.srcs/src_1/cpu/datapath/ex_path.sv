@@ -15,15 +15,17 @@ module ex_path (
     output logic         [31:0] o_ex_alu_result,
     //WB
     output logic         [31:0] alu_result,
+    output logic         [31:0] o_ex_pc_plus_imm,
     //IF
     input  logic         [31:0] i_if_pc,
     output logic                o_if_b_taken,
     output logic         [31:0] o_ex_pc_plus_4,
-    output logic         [31:0] o_ex_pc_plus_imm
+    output logic         [31:0] pc_plus_imm
 );
 
     //alu
     logic [31:0] alu_src2_mux_out;
+    assign pc_plus_imm = i_if_pc + i_id_imm_data;
 
     always_ff @(posedge i_clk or posedge i_rst) begin : ex_path_ff
         if (i_rst) begin
@@ -33,7 +35,7 @@ module ex_path (
         end else begin
             o_ex_alu_result  <= alu_result;
             o_ex_pc_plus_4   <= i_if_pc + 4;
-            o_ex_pc_plus_imm <= i_if_pc + i_id_imm_data;
+            o_ex_pc_plus_imm <= pc_plus_imm;
         end
     end
 

@@ -18,10 +18,10 @@ module apb_slave_dram (
     data_mem U_RAM (
         .clk     (PCLK),
         //control_unit
-        .i_funct3(funct3),
+        .i_funct3(2),
         .dwe     (slv_RAM.PREADY && PWRITE),
         //write
-        .daddr   ({4'b0, PADDR[27:0]}),
+        .daddr   ({4'b0,PADDR[27:0]}),
         .dwdata  (PWDATA),
         //read
         .drdata  (slv_RAM.PRDATA)
@@ -43,8 +43,7 @@ module data_mem (
     output logic [31:0] drdata
 );
 
-    logic [31:0] dmem[0:255];
-
+    logic [31:0] dmem[0:1024];
 
     //S_type
     always_ff @(posedge clk) begin : write_mem_ff

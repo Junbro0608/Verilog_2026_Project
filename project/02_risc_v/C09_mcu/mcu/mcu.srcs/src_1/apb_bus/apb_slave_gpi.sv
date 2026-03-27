@@ -24,19 +24,21 @@ module apb_slave_gpi (
 
     always_ff @(posedge PCLK or posedge PRESET) begin : slv_gpo_ff
         if (PRESET) begin
-            GPI_CTRL_REG  <= 16'h0;
-            GPI_IDATA_REG <= 16'h0;
+            GPI_CTRL_REG <= 16'h0;
         end else begin
             if (slv_GPI.PREADY && PWRITE) begin
                 if (PADDR[11:0] == GPI_CTRL_ADDR) begin
-                    GPI_CTRL_REG = PWDATA;
+                    GPI_CTRL_REG <= PWDATA[15:0];
                 end
-            end
-
-            for (int i = 0; i < 16; i++) begin
-                GPI_IDATA_REG[i] = (GPI_CTRL_REG[i]) ? GPI_in[i] : 16'bz;
             end
         end
     end
 
+    //input GPI
+    genvar i;
+    generate
+        for (i = 0; i < 16; i++) begin
+            assign GPI_IDATA_REG[i] = (GPI_CTRL_REG[i]) ? GPI_in[i] : 16'bz;
+        end
+    endgenerate
 endmodule

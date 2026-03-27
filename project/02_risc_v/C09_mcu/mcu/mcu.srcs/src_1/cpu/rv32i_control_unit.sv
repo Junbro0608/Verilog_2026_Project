@@ -108,7 +108,6 @@ module control_unit (
                         rf_we       = 1;
                         rf_wd_sel   = 0;
                         alu_src_sel = 1;
-                        rf_wd_sel   = 0;
                         if (funct3 == `FNC3_SRL_SRA)
                             alu_control = alu_control_t'({
                                 1'b0, funct7[5], funct3

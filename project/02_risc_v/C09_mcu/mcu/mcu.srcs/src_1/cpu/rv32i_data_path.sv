@@ -25,7 +25,7 @@ module data_path #(
 );
     logic [31:0] o_dec_rs1, o_dec_rs2, o_dec_imm;
     logic o_if_b_taken;
-    logic [31:0] o_ex_alu_result,alu_result, o_ex_pc_plus_4, o_ex_pc_plus_imm;
+    logic [31:0] o_ex_alu_result,alu_result, o_ex_pc_plus_4, o_ex_pc_plus_imm, pc_plus_imm;
     logic [31:0] o_mem_rdata;
     logic [31:0] o_wb_mux_out;
 
@@ -62,11 +62,12 @@ module data_path #(
         .o_ex_alu_result (o_ex_alu_result),
         //WB
         .alu_result      (alu_result),
+        .o_ex_pc_plus_imm(o_ex_pc_plus_imm),
         //IF
         .i_if_pc         (instr_addr),
         .o_if_b_taken    (o_if_b_taken),
         .o_ex_pc_plus_4  (o_ex_pc_plus_4),
-        .o_ex_pc_plus_imm(o_ex_pc_plus_imm)
+        .pc_plus_imm (pc_plus_imm)
     );
 
     mem_path U_MEM_PATH (
@@ -103,7 +104,7 @@ module data_path #(
         .b_src_sel   (b_src_sel),
         //data
         .rs1_plus_imm(alu_result),
-        .pc_plus_imm (o_ex_pc_plus_imm),
+        .pc_plus_imm (pc_plus_imm),
         .pc_plus_4   (o_ex_pc_plus_4),
         .o_pc        (instr_addr)
     );
@@ -127,8 +128,7 @@ module pc (
 );
 
     logic [31:0] pc_reg, pc_next;
-    //output
-    assign o_pc = pc_reg;
+
     //branch_event
     assign j_event = b_taken && branch;
 
@@ -137,6 +137,7 @@ module pc (
             pc_reg <= 0;
         end else begin
             if(pc_en)
+                o_pc = pc_reg;
             pc_reg <= pc_next;
         end
     end

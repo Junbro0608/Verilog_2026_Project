@@ -95,37 +95,32 @@ module imm_extender (
     always_comb begin : imm_comb
         imm_data = 32'b0;
         case (opcode_t'(instr_data[6:0]))
-            S_type: begin
-                imm_data = {
-                    {20{instr_data[31]}}, instr_data[31:25], instr_data[11:7]
-                };
-            end
-            IL_type, I_type, JALR_type: begin
+            // I-Type: imm[11:0]
+            IL_type, I_type: begin
                 imm_data = {{20{instr_data[31]}}, instr_data[31:20]};
             end
+
+            // S-Type: imm[11:5] | imm[4:0]
+            S_type: begin
+                imm_data = {{20{instr_data[31]}}, instr_data[31:25], instr_data[11:7]};
+            end
+
+            // B-Type: imm[12] | imm[11] | imm[10:5] | imm[4:1] | 0
             B_type: begin
-                imm_data = {
-                    {19{instr_data[31]}},
-                    instr_data[31],
-                    instr_data[7],
-                    instr_data[30:25],
-                    instr_data[11:8],
-                    1'b0
-                };
+                imm_data = {{20{instr_data[31]}}, instr_data[7], instr_data[30:25], instr_data[11:8], 1'b0};
             end
+
+            // U-Type: imm[31:12] | 0
             LUI_type, AUIPC_type: begin
-                imm_data = {instr_data[31:12],{12{1'b0}}};
+                imm_data = {instr_data[31:12], 12'b0};
             end
+
+            // J-Type: imm[20] | imm[19:12] | imm[11] | imm[10:1] | 0
             JAL_type: begin
-                imm_data = {
-                    {12{instr_data[31]}},
-                    instr_data[31],
-                    instr_data[19:12],
-                    instr_data[20],
-                    instr_data[30:21],
-                    1'b0
-                };
+                imm_data = {{12{instr_data[31]}}, instr_data[19:12], instr_data[20], instr_data[30:21], 1'b0};
             end
+            
+            default: imm_data = 32'b0;
         endcase
     end
 endmodule

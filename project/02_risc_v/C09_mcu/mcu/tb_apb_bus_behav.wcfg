@@ -12,41 +12,51 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="228500fs"></ZoomStartTime>
-      <ZoomEndTime time="952001fs"></ZoomEndTime>
-      <Cursor1Time time="291500fs"></Cursor1Time>
+      <ZoomStartTime time="1095375000fs"></ZoomStartTime>
+      <ZoomEndTime time="1112025001fs"></ZoomEndTime>
+      <Cursor1Time time="1100875000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="173"></NameColumnWidth>
-      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+      <NameColumnWidth column_width="169"></NameColumnWidth>
+      <ValueColumnWidth column_width="73"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="11" />
-   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/led" type="array">
-      <obj_property name="ElementShortName">led[15:0]</obj_property>
-      <obj_property name="ObjectShortName">led[15:0]</obj_property>
+   <WVObjectSize size="19" />
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/gpi" type="array">
+      <obj_property name="ElementShortName">gpi[7:0]</obj_property>
+      <obj_property name="ObjectShortName">gpi[7:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="group85" type="group">
-      <obj_property name="label">INSTR_ROM</obj_property>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/gpo" type="array">
+      <obj_property name="ElementShortName">gpo[7:0]</obj_property>
+      <obj_property name="ObjectShortName">gpo[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/gpio" type="array">
+      <obj_property name="ElementShortName">gpio[15:0]</obj_property>
+      <obj_property name="ObjectShortName">gpio[15:0]</obj_property>
+   </wvobject>
+   <wvobject type="divider" fp_name="divider87">
+      <obj_property name="label">CPU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_INSTR_MEM/instr_addr" type="array">
-         <obj_property name="ElementShortName">instr_addr[29:0]</obj_property>
-         <obj_property name="ObjectShortName">instr_addr[29:0]</obj_property>
-         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_INSTR_MEM/instr_data" type="array">
-         <obj_property name="ElementShortName">instr_data[31:0]</obj_property>
-         <obj_property name="ObjectShortName">instr_data[31:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_INSTR_MEM/rom" type="array">
-         <obj_property name="ElementShortName">rom[0:127][31:0]</obj_property>
-         <obj_property name="ObjectShortName">rom[0:127][31:0]</obj_property>
-      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_INSTR_MEM/instr_addr" type="array">
+      <obj_property name="ElementShortName">instr_addr[29:0]</obj_property>
+      <obj_property name="ObjectShortName">instr_addr[29:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_INSTR_MEM/instr_data" type="array">
+      <obj_property name="ElementShortName">instr_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">instr_data[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_CTRL_UNIT/opcode" type="array">
+      <obj_property name="ElementShortName">opcode[6:0]</obj_property>
+      <obj_property name="ObjectShortName">opcode[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_CTRL_UNIT/c_state" type="array">
+      <obj_property name="ElementShortName">c_state[2:0]</obj_property>
+      <obj_property name="ObjectShortName">c_state[2:0]</obj_property>
    </wvobject>
    <wvobject fp_name="group389" type="group">
       <obj_property name="label">CTRL_UNIT</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_CTRL_UNIT/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -119,6 +129,7 @@
    <wvobject fp_name="group1011" type="group">
       <obj_property name="label">DATAPATH</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_DEC_PATH/o_dec_imm" type="array">
          <obj_property name="ElementShortName">o_dec_imm[31:0]</obj_property>
          <obj_property name="ObjectShortName">o_dec_imm[31:0]</obj_property>
@@ -135,10 +146,19 @@
          <obj_property name="ElementShortName">alu_result[31:0]</obj_property>
          <obj_property name="ObjectShortName">alu_result[31:0]</obj_property>
       </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_EX_PATH/U_ALU/b_taken" type="logic">
+         <obj_property name="ElementShortName">b_taken</obj_property>
+         <obj_property name="ObjectShortName">b_taken</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_DEC_PATH/U_IMM_EX/imm_data" type="array">
+      <obj_property name="ElementShortName">imm_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">imm_data[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="group403" type="group">
       <obj_property name="label">PC</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_PC/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -195,6 +215,7 @@
    <wvobject fp_name="group378" type="group">
       <obj_property name="label">REG_FILE</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_DEC_PATH/U_REG_FILE/clk" type="logic">
          <obj_property name="ElementShortName">clk</obj_property>
          <obj_property name="ObjectShortName">clk</obj_property>
@@ -214,10 +235,12 @@
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_DEC_PATH/U_REG_FILE/ra1" type="array">
          <obj_property name="ElementShortName">ra1[4:0]</obj_property>
          <obj_property name="ObjectShortName">ra1[4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_DEC_PATH/U_REG_FILE/ra2" type="array">
          <obj_property name="ElementShortName">ra2[4:0]</obj_property>
          <obj_property name="ObjectShortName">ra2[4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_CPU/U_DATA_PATH/U_DEC_PATH/U_REG_FILE/rd1" type="array">
          <obj_property name="ElementShortName">rd1[31:0]</obj_property>
@@ -302,6 +325,7 @@
       <wvobject fp_name="group439" type="group">
          <obj_property name="label">RAM</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/tb_rv32i_all_type/U_DUT/slv_RAM/PRDATA" type="array">
             <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
             <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
@@ -318,6 +342,7 @@
       <wvobject fp_name="group1007" type="group">
          <obj_property name="label">GPO</obj_property>
          <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
          <wvobject fp_name="/tb_rv32i_all_type/U_DUT/slv_GPO/PRDATA" type="array">
             <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
             <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
@@ -348,10 +373,27 @@
             <obj_property name="ObjectShortName">PREADY</obj_property>
          </wvobject>
       </wvobject>
+      <wvobject fp_name="group263" type="group">
+         <obj_property name="label">GPIO</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <wvobject fp_name="/tb_rv32i_all_type/U_DUT/slv_GPIO/PRDATA" type="array">
+            <obj_property name="ElementShortName">PRDATA[31:0]</obj_property>
+            <obj_property name="ObjectShortName">PRDATA[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_rv32i_all_type/U_DUT/slv_GPIO/PSEL" type="logic">
+            <obj_property name="ElementShortName">PSEL</obj_property>
+            <obj_property name="ObjectShortName">PSEL</obj_property>
+         </wvobject>
+         <wvobject fp_name="/tb_rv32i_all_type/U_DUT/slv_GPIO/PREADY" type="logic">
+            <obj_property name="ElementShortName">PREADY</obj_property>
+            <obj_property name="ObjectShortName">PREADY</obj_property>
+         </wvobject>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group480" type="group">
       <obj_property name="label">slv_RAM</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="group86" type="group">
          <obj_property name="label">DRAM</obj_property>
          <obj_property name="DisplayName">label</obj_property>
@@ -371,6 +413,7 @@
          <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_DRAM/U_RAM/daddr" type="array">
             <obj_property name="ElementShortName">daddr[31:0]</obj_property>
             <obj_property name="ObjectShortName">daddr[31:0]</obj_property>
+            <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
          </wvobject>
          <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_DRAM/U_RAM/dwdata" type="array">
             <obj_property name="ElementShortName">dwdata[31:0]</obj_property>
@@ -381,14 +424,16 @@
             <obj_property name="ObjectShortName">drdata[31:0]</obj_property>
          </wvobject>
          <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_DRAM/U_RAM/dmem" type="array">
-            <obj_property name="ElementShortName">dmem[0:255][31:0]</obj_property>
-            <obj_property name="ObjectShortName">dmem[0:255][31:0]</obj_property>
+            <obj_property name="ElementShortName">dmem[0:1024][31:0]</obj_property>
+            <obj_property name="ObjectShortName">dmem[0:1024][31:0]</obj_property>
+            <obj_property name="isExpanded"></obj_property>
          </wvobject>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group480" type="group">
       <obj_property name="label">slv_GPO</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPO/PCLK" type="logic">
          <obj_property name="ElementShortName">PCLK</obj_property>
          <obj_property name="ObjectShortName">PCLK</obj_property>
@@ -420,14 +465,6 @@
       <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPO/GPO_CTRL_REG" type="array">
          <obj_property name="ElementShortName">GPO_CTRL_REG[15:0]</obj_property>
          <obj_property name="ObjectShortName">GPO_CTRL_REG[15:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPO/GPO_CTRL_ADDR" type="array">
-         <obj_property name="ElementShortName">GPO_CTRL_ADDR[11:0]</obj_property>
-         <obj_property name="ObjectShortName">GPO_CTRL_ADDR[11:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPO/GPO_ODATA_ADDR" type="array">
-         <obj_property name="ElementShortName">GPO_ODATA_ADDR[11:0]</obj_property>
-         <obj_property name="ObjectShortName">GPO_ODATA_ADDR[11:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group1586" type="group">
@@ -470,13 +507,50 @@
          <obj_property name="ElementShortName">GPI_CTRL_REG[15:0]</obj_property>
          <obj_property name="ObjectShortName">GPI_CTRL_REG[15:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPI/GPI_CTRL_ADDR" type="array">
-         <obj_property name="ElementShortName">GPI_CTRL_ADDR[11:0]</obj_property>
-         <obj_property name="ObjectShortName">GPI_CTRL_ADDR[11:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group259" type="group">
+      <obj_property name="label">slv_GPIO</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/PCLK" type="logic">
+         <obj_property name="ElementShortName">PCLK</obj_property>
+         <obj_property name="ObjectShortName">PCLK</obj_property>
       </wvobject>
-      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPI/GPI_IDATA_ADDR" type="array">
-         <obj_property name="ElementShortName">GPI_IDATA_ADDR[11:0]</obj_property>
-         <obj_property name="ObjectShortName">GPI_IDATA_ADDR[11:0]</obj_property>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/PRESET" type="logic">
+         <obj_property name="ElementShortName">PRESET</obj_property>
+         <obj_property name="ObjectShortName">PRESET</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/PADDR" type="array">
+         <obj_property name="ElementShortName">PADDR[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PADDR[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/PWDATA" type="array">
+         <obj_property name="ElementShortName">PWDATA[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PWDATA[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/PWRITE" type="logic">
+         <obj_property name="ElementShortName">PWRITE</obj_property>
+         <obj_property name="ObjectShortName">PWRITE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/PENABLE" type="logic">
+         <obj_property name="ElementShortName">PENABLE</obj_property>
+         <obj_property name="ObjectShortName">PENABLE</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/GPIO_io" type="array">
+         <obj_property name="ElementShortName">GPIO_io[15:0]</obj_property>
+         <obj_property name="ObjectShortName">GPIO_io[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/GPIO_ODATA_REG" type="array">
+         <obj_property name="ElementShortName">GPIO_ODATA_REG[15:0]</obj_property>
+         <obj_property name="ObjectShortName">GPIO_ODATA_REG[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/GPIO_CTRL_REG" type="array">
+         <obj_property name="ElementShortName">GPIO_CTRL_REG[15:0]</obj_property>
+         <obj_property name="ObjectShortName">GPIO_CTRL_REG[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/tb_rv32i_all_type/U_DUT/U_SLV_GPIO/GPIO_IDATA_REG" type="array">
+         <obj_property name="ElementShortName">GPIO_IDATA_REG[15:0]</obj_property>
+         <obj_property name="ObjectShortName">GPIO_IDATA_REG[15:0]</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
