@@ -1,3 +1,4 @@
+
 # Vivado temporary files
 *.log
 *.jou
@@ -19,6 +20,30 @@
 # Waveform data
 *.vcd
 *.wdb
+
+# logs 폴더와 그 안의 .log 파일은 예외로 관리함
+!logs/
+!logs/*.log
+# --- Synopsys VCS & DVE/Verdi ---
+# VCS가 생성하는 컴파일 결과물 및 디렉토리
+csrc/
+simv
+simv.daidir/
+simv.vdb/
+ucli.key
+vc_hdrs.h
+vlogan.log
+vhdlan.log
+
+# Verdi / DVE (Waveform & Debug)
+*.conf
+*.rc
+VerdiLog/
+Verdi-UltraLog/
+novas.conf
+novas.rc
+*.fsdb
+*.vwf
 
 # vscode c compiler
 .vscode/

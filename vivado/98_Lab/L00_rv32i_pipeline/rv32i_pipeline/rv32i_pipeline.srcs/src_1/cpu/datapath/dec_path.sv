@@ -6,14 +6,17 @@ module dec_path (
     input               i_rst,
     //ctrl_unit
     input               i_cu_rf_we,
-    //IF
+    //Input
     input        [31:0] i_if_instr_data,
-    //ID
+    input        [31:0] i_if_pc,
+    input        [31:0] i_if_pc_puls_4,
+    input        [31:0] i_wb_data,
+    //Output
     output logic [31:0] o_dec_rs1,
     output logic [31:0] o_dec_rs2,
     output logic [31:0] o_dec_imm,
-    //WB
-    input        [31:0] i_wb_mux_data
+    output logic [31:0] o_dec_pc_puls_4,
+    output logic [31:0] o_dec_pc_puls_rs1
 );
     //register_file
     logic [31:0] rd1, rd2;
@@ -107,7 +110,9 @@ module imm_extender (
 
             // B-Type: imm[12] | imm[11] | imm[10:5] | imm[4:1] | 0
             B_type: begin
-                imm_data = {{20{instr_data[31]}}, instr_data[7], instr_data[30:25], instr_data[11:8], 1'b0};
+                imm_data = {
+                    {20{instr_data[31]}}, instr_data[7], instr_data[30:25], instr_data[11:8], 1'b0
+                };
             end
 
             // U-Type: imm[31:12] | 0
@@ -117,7 +122,9 @@ module imm_extender (
 
             // J-Type: imm[20] | imm[19:12] | imm[11] | imm[10:1] | 0
             JAL_type: begin
-                imm_data = {{12{instr_data[31]}}, instr_data[19:12], instr_data[20], instr_data[30:21], 1'b0};
+                imm_data = {
+                    {12{instr_data[31]}}, instr_data[19:12], instr_data[20], instr_data[30:21], 1'b0
+                };
             end
             default: imm_data = 32'b0;
         endcase

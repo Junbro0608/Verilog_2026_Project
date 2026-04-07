@@ -40,7 +40,7 @@ class adder_sequence extends uvm_sequence;
             if (!a_seq_item.randomize()) begin
                 `uvm_error("SEQ_ITEM", "Fail to generate random valude!")
             end
-            `uvm_info("SEQ", "DATA sned to Driver", UVM_NONE);
+            `uvm_info("SEQ", "DATA send to Driver", UVM_NONE);
             finish_item(a_seq_item);
         end
     endtask
