@@ -1,0 +1,356 @@
+Info: [VCS_SAVE_RESTORE_INFO] ASLR (Address Space Layout Randomization) is detected on the machine. To enable $save functionality, ASLR will be switched off and simv re-executed.
+Please use '-no_save' simv switch to avoid re-execution or '-suppress=ASLR_DETECTED_INFO' to suppress this message.
+Chronologic VCS simulator copyright 1991-2024
+Contains Synopsys proprietary information.
+Compiler version W-2024.09-SP1_Full64; Runtime version W-2024.09-SP1_Full64;  Apr  7 20:16 2026
+
+Warning-[INV-RANDSEED-VAL] Invalid random seed value
+  Invalid random seed value passed through command line or environment 
+  variable. Seed value should be an integer. Using 1 as seed value
+
+UVM_INFO /tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_root.svh(402) @ 0: reporter [UVM/RELNOTES] 
+----------------------------------------------------------------
+UVM-1.2.Synopsys
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0.000ns: reporter [RNTST] Running test ram_test...
+UVM_INFO ./tb/tb_ram.sv(93) @ 2576.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=17429
+UVM_INFO ./tb/tb_ram.sv(93) @ 2586.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=53202
+UVM_INFO ./tb/tb_ram.sv(93) @ 2596.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28316
+UVM_INFO ./tb/tb_ram.sv(93) @ 2606.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49324
+UVM_INFO ./tb/tb_ram.sv(93) @ 2616.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=11504
+UVM_INFO ./tb/tb_ram.sv(93) @ 2626.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=52616
+UVM_INFO ./tb/tb_ram.sv(93) @ 2636.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28229
+UVM_INFO ./tb/tb_ram.sv(93) @ 2646.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=14136
+UVM_INFO ./tb/tb_ram.sv(93) @ 2656.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35980
+UVM_INFO ./tb/tb_ram.sv(93) @ 2666.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=34320
+UVM_INFO ./tb/tb_ram.sv(93) @ 2676.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=25166
+UVM_INFO ./tb/tb_ram.sv(93) @ 2686.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=23260
+UVM_INFO ./tb/tb_ram.sv(93) @ 2696.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=13749
+UVM_INFO ./tb/tb_ram.sv(93) @ 2706.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=60499
+UVM_INFO ./tb/tb_ram.sv(93) @ 2716.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24304
+UVM_INFO ./tb/tb_ram.sv(93) @ 2726.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=51449
+UVM_INFO ./tb/tb_ram.sv(93) @ 2736.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=46978
+UVM_INFO ./tb/tb_ram.sv(93) @ 2746.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=44914
+UVM_INFO ./tb/tb_ram.sv(93) @ 2756.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41927
+UVM_INFO ./tb/tb_ram.sv(93) @ 2766.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=60992
+UVM_INFO ./tb/tb_ram.sv(93) @ 2776.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24111
+UVM_INFO ./tb/tb_ram.sv(93) @ 2786.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=17970
+UVM_INFO ./tb/tb_ram.sv(93) @ 2796.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=22433
+UVM_INFO ./tb/tb_ram.sv(93) @ 2806.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4749
+UVM_INFO ./tb/tb_ram.sv(93) @ 2816.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=11611
+UVM_INFO ./tb/tb_ram.sv(93) @ 2826.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=46249
+UVM_INFO ./tb/tb_ram.sv(93) @ 2836.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=10667
+UVM_INFO ./tb/tb_ram.sv(93) @ 2846.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=64224
+UVM_INFO ./tb/tb_ram.sv(93) @ 2856.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=43942
+UVM_INFO ./tb/tb_ram.sv(93) @ 2866.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=55354
+UVM_INFO ./tb/tb_ram.sv(93) @ 2876.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=33020
+UVM_INFO ./tb/tb_ram.sv(93) @ 2886.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=13537
+UVM_INFO ./tb/tb_ram.sv(93) @ 2896.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=7321
+UVM_INFO ./tb/tb_ram.sv(93) @ 2906.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=9699
+UVM_INFO ./tb/tb_ram.sv(93) @ 2916.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=12611
+UVM_INFO ./tb/tb_ram.sv(93) @ 2926.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4706
+UVM_INFO ./tb/tb_ram.sv(93) @ 2936.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=33597
+UVM_INFO ./tb/tb_ram.sv(93) @ 2946.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=59101
+UVM_INFO ./tb/tb_ram.sv(93) @ 2956.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=44167
+UVM_INFO ./tb/tb_ram.sv(93) @ 2966.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=65204
+UVM_INFO ./tb/tb_ram.sv(93) @ 2976.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=25071
+UVM_INFO ./tb/tb_ram.sv(93) @ 2986.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=40928
+UVM_INFO ./tb/tb_ram.sv(93) @ 2996.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49236
+UVM_INFO ./tb/tb_ram.sv(93) @ 3006.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=17784
+UVM_INFO ./tb/tb_ram.sv(93) @ 3016.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=1707
+UVM_INFO ./tb/tb_ram.sv(93) @ 3026.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=1759
+UVM_INFO ./tb/tb_ram.sv(93) @ 3036.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=60470
+UVM_INFO ./tb/tb_ram.sv(93) @ 3046.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49853
+UVM_INFO ./tb/tb_ram.sv(93) @ 3056.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=62976
+UVM_INFO ./tb/tb_ram.sv(93) @ 3066.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=20193
+UVM_INFO ./tb/tb_ram.sv(93) @ 3076.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=11888
+UVM_INFO ./tb/tb_ram.sv(93) @ 3086.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=58155
+UVM_INFO ./tb/tb_ram.sv(93) @ 3096.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=7941
+UVM_INFO ./tb/tb_ram.sv(93) @ 3106.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=11965
+UVM_INFO ./tb/tb_ram.sv(93) @ 3116.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=42605
+UVM_INFO ./tb/tb_ram.sv(93) @ 3126.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=10077
+UVM_INFO ./tb/tb_ram.sv(93) @ 3136.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=30100
+UVM_INFO ./tb/tb_ram.sv(93) @ 3146.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=61011
+UVM_INFO ./tb/tb_ram.sv(93) @ 3156.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4864
+UVM_INFO ./tb/tb_ram.sv(93) @ 3166.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=7169
+UVM_INFO ./tb/tb_ram.sv(93) @ 3176.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=34297
+UVM_INFO ./tb/tb_ram.sv(93) @ 3186.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=32434
+UVM_INFO ./tb/tb_ram.sv(93) @ 3196.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=29999
+UVM_INFO ./tb/tb_ram.sv(93) @ 3206.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=12128
+UVM_INFO ./tb/tb_ram.sv(93) @ 3216.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=6432
+UVM_INFO ./tb/tb_ram.sv(93) @ 3226.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=64385
+UVM_INFO ./tb/tb_ram.sv(93) @ 3236.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35496
+UVM_INFO ./tb/tb_ram.sv(93) @ 3246.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=22652
+UVM_INFO ./tb/tb_ram.sv(93) @ 3256.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63912
+UVM_INFO ./tb/tb_ram.sv(93) @ 3266.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=51844
+UVM_INFO ./tb/tb_ram.sv(93) @ 3276.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=39684
+UVM_INFO ./tb/tb_ram.sv(93) @ 3286.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=21197
+UVM_INFO ./tb/tb_ram.sv(93) @ 3296.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=3660
+UVM_INFO ./tb/tb_ram.sv(93) @ 3306.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=6798
+UVM_INFO ./tb/tb_ram.sv(93) @ 3316.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=20807
+UVM_INFO ./tb/tb_ram.sv(93) @ 3326.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=25851
+UVM_INFO ./tb/tb_ram.sv(93) @ 3336.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=6484
+UVM_INFO ./tb/tb_ram.sv(93) @ 3346.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63641
+UVM_INFO ./tb/tb_ram.sv(93) @ 3356.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=5418
+UVM_INFO ./tb/tb_ram.sv(93) @ 3366.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=58417
+UVM_INFO ./tb/tb_ram.sv(93) @ 3376.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=21311
+UVM_INFO ./tb/tb_ram.sv(93) @ 3386.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=10701
+UVM_INFO ./tb/tb_ram.sv(93) @ 3396.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=11474
+UVM_INFO ./tb/tb_ram.sv(93) @ 3406.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=22067
+UVM_INFO ./tb/tb_ram.sv(93) @ 3416.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=36540
+UVM_INFO ./tb/tb_ram.sv(93) @ 3426.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=50044
+UVM_INFO ./tb/tb_ram.sv(93) @ 3436.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=3008
+UVM_INFO ./tb/tb_ram.sv(93) @ 3446.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41224
+UVM_INFO ./tb/tb_ram.sv(93) @ 3456.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=23653
+UVM_INFO ./tb/tb_ram.sv(93) @ 3466.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=32875
+UVM_INFO ./tb/tb_ram.sv(93) @ 3476.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=14003
+UVM_INFO ./tb/tb_ram.sv(93) @ 3486.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24127
+UVM_INFO ./tb/tb_ram.sv(93) @ 3496.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63639
+UVM_INFO ./tb/tb_ram.sv(93) @ 3506.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28365
+UVM_INFO ./tb/tb_ram.sv(93) @ 3516.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=8920
+UVM_INFO ./tb/tb_ram.sv(93) @ 3526.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=48860
+UVM_INFO ./tb/tb_ram.sv(93) @ 3536.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=27239
+UVM_INFO ./tb/tb_ram.sv(93) @ 3546.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=18072
+UVM_INFO ./tb/tb_ram.sv(93) @ 3556.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=31328
+UVM_INFO ./tb/tb_ram.sv(93) @ 3566.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=2245
+UVM_INFO ./tb/tb_ram.sv(93) @ 3576.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=55845
+UVM_INFO ./tb/tb_ram.sv(93) @ 3586.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=20791
+UVM_INFO ./tb/tb_ram.sv(93) @ 3596.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=45344
+UVM_INFO ./tb/tb_ram.sv(93) @ 3606.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=38301
+UVM_INFO ./tb/tb_ram.sv(93) @ 3616.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=60472
+UVM_INFO ./tb/tb_ram.sv(93) @ 3626.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=43026
+UVM_INFO ./tb/tb_ram.sv(93) @ 3636.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=14645
+UVM_INFO ./tb/tb_ram.sv(93) @ 3646.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41322
+UVM_INFO ./tb/tb_ram.sv(93) @ 3656.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=14049
+UVM_INFO ./tb/tb_ram.sv(93) @ 3666.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28500
+UVM_INFO ./tb/tb_ram.sv(93) @ 3676.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=21830
+UVM_INFO ./tb/tb_ram.sv(93) @ 3686.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=36068
+UVM_INFO ./tb/tb_ram.sv(93) @ 3696.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=2855
+UVM_INFO ./tb/tb_ram.sv(93) @ 3706.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=55652
+UVM_INFO ./tb/tb_ram.sv(93) @ 3716.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=32422
+UVM_INFO ./tb/tb_ram.sv(93) @ 3726.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35564
+UVM_INFO ./tb/tb_ram.sv(93) @ 3736.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=38807
+UVM_INFO ./tb/tb_ram.sv(93) @ 3746.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=29893
+UVM_INFO ./tb/tb_ram.sv(93) @ 3756.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28196
+UVM_INFO ./tb/tb_ram.sv(93) @ 3766.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4430
+UVM_INFO ./tb/tb_ram.sv(93) @ 3776.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24555
+UVM_INFO ./tb/tb_ram.sv(93) @ 3786.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=30668
+UVM_INFO ./tb/tb_ram.sv(93) @ 3796.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28717
+UVM_INFO ./tb/tb_ram.sv(93) @ 3806.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=8604
+UVM_INFO ./tb/tb_ram.sv(93) @ 3816.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=16697
+UVM_INFO ./tb/tb_ram.sv(93) @ 3826.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=52641
+UVM_INFO ./tb/tb_ram.sv(93) @ 3836.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=30545
+UVM_INFO ./tb/tb_ram.sv(93) @ 3846.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=52538
+UVM_INFO ./tb/tb_ram.sv(93) @ 3856.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41814
+UVM_INFO ./tb/tb_ram.sv(93) @ 3866.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=27206
+UVM_INFO ./tb/tb_ram.sv(93) @ 3876.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63609
+UVM_INFO ./tb/tb_ram.sv(93) @ 3886.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=18444
+UVM_INFO ./tb/tb_ram.sv(93) @ 3896.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49410
+UVM_INFO ./tb/tb_ram.sv(93) @ 3906.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=47840
+UVM_INFO ./tb/tb_ram.sv(93) @ 3916.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=43884
+UVM_INFO ./tb/tb_ram.sv(93) @ 3926.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=40174
+UVM_INFO ./tb/tb_ram.sv(93) @ 3936.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=19269
+UVM_INFO ./tb/tb_ram.sv(93) @ 3946.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=7329
+UVM_INFO ./tb/tb_ram.sv(93) @ 3956.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=5366
+UVM_INFO ./tb/tb_ram.sv(93) @ 3966.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=31847
+UVM_INFO ./tb/tb_ram.sv(93) @ 3976.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=25682
+UVM_INFO ./tb/tb_ram.sv(93) @ 3986.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24846
+UVM_INFO ./tb/tb_ram.sv(93) @ 3996.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41116
+UVM_INFO ./tb/tb_ram.sv(93) @ 4006.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49057
+UVM_INFO ./tb/tb_ram.sv(93) @ 4016.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=2281
+UVM_INFO ./tb/tb_ram.sv(93) @ 4026.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49852
+UVM_INFO ./tb/tb_ram.sv(93) @ 4036.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=64746
+UVM_INFO ./tb/tb_ram.sv(93) @ 4046.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=47326
+UVM_INFO ./tb/tb_ram.sv(93) @ 4056.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=19056
+UVM_INFO ./tb/tb_ram.sv(93) @ 4066.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=33890
+UVM_INFO ./tb/tb_ram.sv(93) @ 4076.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=20852
+UVM_INFO ./tb/tb_ram.sv(93) @ 4086.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=45503
+UVM_INFO ./tb/tb_ram.sv(93) @ 4096.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35469
+UVM_INFO ./tb/tb_ram.sv(93) @ 4106.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=3072
+UVM_INFO ./tb/tb_ram.sv(93) @ 4116.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=17390
+UVM_INFO ./tb/tb_ram.sv(93) @ 4126.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=53170
+UVM_INFO ./tb/tb_ram.sv(93) @ 4136.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=56066
+UVM_INFO ./tb/tb_ram.sv(93) @ 4146.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=61900
+UVM_INFO ./tb/tb_ram.sv(93) @ 4156.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=50280
+UVM_INFO ./tb/tb_ram.sv(93) @ 4166.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=3593
+UVM_INFO ./tb/tb_ram.sv(93) @ 4176.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=45248
+UVM_INFO ./tb/tb_ram.sv(93) @ 4186.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=42538
+UVM_INFO ./tb/tb_ram.sv(93) @ 4196.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=37932
+UVM_INFO ./tb/tb_ram.sv(93) @ 4206.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=59887
+UVM_INFO ./tb/tb_ram.sv(93) @ 4216.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=51841
+UVM_INFO ./tb/tb_ram.sv(93) @ 4226.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=38472
+UVM_INFO ./tb/tb_ram.sv(93) @ 4236.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=18980
+UVM_INFO ./tb/tb_ram.sv(93) @ 4246.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63779
+UVM_INFO ./tb/tb_ram.sv(93) @ 4256.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=19594
+UVM_INFO ./tb/tb_ram.sv(93) @ 4266.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=37358
+UVM_INFO ./tb/tb_ram.sv(93) @ 4276.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=26961
+UVM_INFO ./tb/tb_ram.sv(93) @ 4286.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=52115
+UVM_INFO ./tb/tb_ram.sv(93) @ 4296.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=1576
+UVM_INFO ./tb/tb_ram.sv(93) @ 4306.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=55628
+UVM_INFO ./tb/tb_ram.sv(93) @ 4316.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=34154
+UVM_INFO ./tb/tb_ram.sv(93) @ 4326.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=57360
+UVM_INFO ./tb/tb_ram.sv(93) @ 4336.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=28146
+UVM_INFO ./tb/tb_ram.sv(93) @ 4346.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24320
+UVM_INFO ./tb/tb_ram.sv(93) @ 4356.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=44941
+UVM_INFO ./tb/tb_ram.sv(93) @ 4366.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=53204
+UVM_INFO ./tb/tb_ram.sv(93) @ 4376.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=40695
+UVM_INFO ./tb/tb_ram.sv(93) @ 4386.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=3999
+UVM_INFO ./tb/tb_ram.sv(93) @ 4396.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=34796
+UVM_INFO ./tb/tb_ram.sv(93) @ 4406.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35903
+UVM_INFO ./tb/tb_ram.sv(93) @ 4416.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4745
+UVM_INFO ./tb/tb_ram.sv(93) @ 4426.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=62724
+UVM_INFO ./tb/tb_ram.sv(93) @ 4436.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=36743
+UVM_INFO ./tb/tb_ram.sv(93) @ 4446.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=8143
+UVM_INFO ./tb/tb_ram.sv(93) @ 4456.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=30606
+UVM_INFO ./tb/tb_ram.sv(93) @ 4466.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=37973
+UVM_INFO ./tb/tb_ram.sv(93) @ 4476.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63297
+UVM_INFO ./tb/tb_ram.sv(93) @ 4486.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=42172
+UVM_INFO ./tb/tb_ram.sv(93) @ 4496.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=58498
+UVM_INFO ./tb/tb_ram.sv(93) @ 4506.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=42066
+UVM_INFO ./tb/tb_ram.sv(93) @ 4516.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49956
+UVM_INFO ./tb/tb_ram.sv(93) @ 4526.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=39710
+UVM_INFO ./tb/tb_ram.sv(93) @ 4536.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=18047
+UVM_INFO ./tb/tb_ram.sv(93) @ 4546.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=44295
+UVM_INFO ./tb/tb_ram.sv(93) @ 4556.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63132
+UVM_INFO ./tb/tb_ram.sv(93) @ 4566.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=21510
+UVM_INFO ./tb/tb_ram.sv(93) @ 4576.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35584
+UVM_INFO ./tb/tb_ram.sv(93) @ 4586.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=39072
+UVM_INFO ./tb/tb_ram.sv(93) @ 4596.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49496
+UVM_INFO ./tb/tb_ram.sv(93) @ 4606.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63254
+UVM_INFO ./tb/tb_ram.sv(93) @ 4616.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=30941
+UVM_INFO ./tb/tb_ram.sv(93) @ 4626.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=64735
+UVM_INFO ./tb/tb_ram.sv(93) @ 4636.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=45937
+UVM_INFO ./tb/tb_ram.sv(93) @ 4646.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=26447
+UVM_INFO ./tb/tb_ram.sv(93) @ 4656.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=8090
+UVM_INFO ./tb/tb_ram.sv(93) @ 4666.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41144
+UVM_INFO ./tb/tb_ram.sv(93) @ 4676.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=41171
+UVM_INFO ./tb/tb_ram.sv(93) @ 4686.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=62737
+UVM_INFO ./tb/tb_ram.sv(93) @ 4696.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=5819
+UVM_INFO ./tb/tb_ram.sv(93) @ 4706.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=8393
+UVM_INFO ./tb/tb_ram.sv(93) @ 4716.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=21842
+UVM_INFO ./tb/tb_ram.sv(93) @ 4726.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4273
+UVM_INFO ./tb/tb_ram.sv(93) @ 4736.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=10853
+UVM_INFO ./tb/tb_ram.sv(93) @ 4746.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=40235
+UVM_INFO ./tb/tb_ram.sv(93) @ 4756.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=23230
+UVM_INFO ./tb/tb_ram.sv(93) @ 4766.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=55117
+UVM_INFO ./tb/tb_ram.sv(93) @ 4776.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=31080
+UVM_INFO ./tb/tb_ram.sv(93) @ 4786.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=16730
+UVM_INFO ./tb/tb_ram.sv(93) @ 4796.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=49263
+UVM_INFO ./tb/tb_ram.sv(93) @ 4806.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=4936
+UVM_INFO ./tb/tb_ram.sv(93) @ 4816.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=37054
+UVM_INFO ./tb/tb_ram.sv(93) @ 4826.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=45855
+UVM_INFO ./tb/tb_ram.sv(93) @ 4836.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=13502
+UVM_INFO ./tb/tb_ram.sv(93) @ 4846.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24722
+UVM_INFO ./tb/tb_ram.sv(93) @ 4856.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=39463
+UVM_INFO ./tb/tb_ram.sv(93) @ 4866.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=17995
+UVM_INFO ./tb/tb_ram.sv(93) @ 4876.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=10870
+UVM_INFO ./tb/tb_ram.sv(93) @ 4886.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=10831
+UVM_INFO ./tb/tb_ram.sv(93) @ 4896.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=9916
+UVM_INFO ./tb/tb_ram.sv(93) @ 4906.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=51234
+UVM_INFO ./tb/tb_ram.sv(93) @ 4916.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=3489
+UVM_INFO ./tb/tb_ram.sv(93) @ 4926.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=22462
+UVM_INFO ./tb/tb_ram.sv(93) @ 4936.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=31602
+UVM_INFO ./tb/tb_ram.sv(93) @ 4946.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=24340
+UVM_INFO ./tb/tb_ram.sv(93) @ 4956.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=58544
+UVM_INFO ./tb/tb_ram.sv(93) @ 4966.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=879
+UVM_INFO ./tb/tb_ram.sv(93) @ 4976.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=29375
+UVM_INFO ./tb/tb_ram.sv(93) @ 4986.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=57256
+UVM_INFO ./tb/tb_ram.sv(93) @ 4996.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=23553
+UVM_INFO ./tb/tb_ram.sv(93) @ 5006.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=25749
+UVM_INFO ./tb/tb_ram.sv(93) @ 5016.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=27228
+UVM_INFO ./tb/tb_ram.sv(93) @ 5026.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=32723
+UVM_INFO ./tb/tb_ram.sv(93) @ 5036.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=6617
+UVM_INFO ./tb/tb_ram.sv(93) @ 5046.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=56752
+UVM_INFO ./tb/tb_ram.sv(93) @ 5056.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=37872
+UVM_INFO ./tb/tb_ram.sv(93) @ 5066.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=62366
+UVM_INFO ./tb/tb_ram.sv(93) @ 5076.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=42211
+UVM_INFO ./tb/tb_ram.sv(93) @ 5086.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=63286
+UVM_INFO ./tb/tb_ram.sv(93) @ 5096.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=31933
+UVM_INFO ./tb/tb_ram.sv(93) @ 5106.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=31224
+UVM_INFO ./tb/tb_ram.sv(93) @ 5116.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=60322
+UVM_INFO ./tb/tb_ram.sv(93) @ 5126.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=29872
+UVM_INFO ./tb/tb_ram.sv(93) @ 5136.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=29872
+UVM_INFO ./tb/tb_ram.sv(93) @ 5146.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=29872
+UVM_INFO ./tb/tb_ram.sv(93) @ 7736.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7746.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7776.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7806.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7816.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7826.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7856.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7866.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7876.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7886.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7936.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7946.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7956.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7976.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 7986.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8026.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8036.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8046.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8056.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8066.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8076.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=38095
+UVM_INFO ./tb/tb_ram.sv(93) @ 8096.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8106.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8116.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8136.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8146.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=1833
+UVM_INFO ./tb/tb_ram.sv(93) @ 8166.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8176.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO ./tb/tb_ram.sv(93) @ 8186.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=35586
+UVM_INFO ./tb/tb_ram.sv(93) @ 8216.000ns: uvm_test_top.env.agt.mon [ram_monitor] 일치! rdata=0
+UVM_INFO /tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_objection.svh(1276) @ 8335.000ns: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO ./tb/tb_ram.sv(175) @ 8335.000ns: uvm_test_top [ram_test] ===== TEST PASS ! =====
+UVM_INFO /tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_report_catcher.svh(705) @ 8335.000ns: reporter [UVM/REPORT/CATCHER] 
+--- UVM Report catcher Summary ---
+
+
+Number of demoted UVM_FATAL reports  :    0
+Number of demoted UVM_ERROR reports  :    0
+Number of demoted UVM_WARNING reports:    0
+Number of caught UVM_FATAL reports   :    0
+Number of caught UVM_ERROR reports   :    0
+Number of caught UVM_WARNING reports :    0
+
+UVM_INFO /tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_report_server.svh(904) @ 8335.000ns: reporter [UVM/REPORT/SERVER] 
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  293
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+[UVM/REPORT/CATCHER]     1
+[ram_monitor]   288
+[ram_test]     1
+
+$finish called from file "/tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_root.svh", line 527.
+$finish at simulation time           8335.000ns
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 8335000 ps
+CPU Time:      0.220 seconds;       Data structure size:   0.6Mb
+Tue Apr  7 20:16:45 2026
