@@ -2,10 +2,10 @@
 #vcs -full64 -sverilog -debug_access+all -ntb_opts uvm-1.2 -timescale=1ns/1ps -kdb -lca -o simv ./rtl/adder.sv ./tb/tb_adder.sv
 
 #-------------------value---------------------
-NAME		:= ram
+NAME		:= counter
 TOP 		:= tb_top
 TEST 		:= $(NAME)_test
-VERBOSITY 	:= UVM_DEBUG
+VERBOSITY 	:= UVM_LOW
 SEED 		:= random
 
 #-------------------file_name---------------------

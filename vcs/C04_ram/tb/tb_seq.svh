@@ -21,7 +21,13 @@ class ram_seq_item extends uvm_sequence_item;
     endfunction
 
     function string convert2string();
-        return $sformatf("write=%0b, addr=%0d, wdata=%0d, rdata=%0d", write, addr, wdata, rdata);
+        return $sformatf(
+            "write=%0b, addr=%0d, wdata=%0d, rdata=%0d",
+            write,
+            addr,
+            wdata,
+            rdata
+        );
     endfunction
 endclass
 
@@ -40,9 +46,9 @@ class ram_reset_seq extends uvm_sequence #(ram_seq_item);
             item = ram_seq_item::type_id::create($sformatf("item_%0d", i));
 
             start_item(item);
-            item.write = 1;
-            item.addr  = i;
-            item.wdata = 16'bx;
+            item.write       = 1;
+            item.addr        = i;
+            item.wdata       = 16'b0;
             finish_item(item);
 
         end
@@ -71,8 +77,8 @@ class ram_only_read_seq extends uvm_sequence #(ram_seq_item);
             if (!item.randomize()) begin
                 `uvm_fatal(get_type_name(), "randomization failed");
             end
-            item.write = 1;
-            item.addr  = i;
+            item.write  = 1;
+            item.addr   = i;
             finish_item(item);
 
             `uvm_info(get_type_name(), $sformatf(
@@ -83,8 +89,8 @@ class ram_only_read_seq extends uvm_sequence #(ram_seq_item);
             item = ram_seq_item::type_id::create($sformatf("item_%0d", i));
 
             start_item(item);
-            item.write = 0;
-            item.addr  = i;
+            item.write  = 0;
+            item.addr   = i;
             finish_item(item);
             `uvm_info(get_type_name(), $sformatf(
                       "[%0d/%0d] %s", i + 1, num_transations, item.convert2string()), UVM_HIGH);
@@ -133,20 +139,20 @@ class ram_master_seq extends uvm_sequence #(ram_seq_item);
         ram_reset_seq             reset_seq;
         ram_only_read_seq         only_read_seq;
         ram_random_read_write_seq random_read_seq;
-        
+
         //0~256번지까지 오직 쓰고 0~256번지까지 읽기
         `uvm_info(get_type_name(), "===== Phase1 : Only Read =====", UVM_MEDIUM);
         only_read_seq = ram_only_read_seq::type_id::create("only_read_seq");
         only_read_seq.num_transations = (2 ** 8);
         only_read_seq.start(m_sequencer);
         #20;
-        `uvm_info(get_type_name(), "===== Phase2 : Reset =====", UVM_MEDIUM);
-        reset_seq = ram_reset_seq::type_id::create("reset_seq");
-        reset_seq.num_transations = (2 ** 8);
-        reset_seq.start(m_sequencer);
-        #20;
+        // `uvm_info(get_type_name(), "===== Phase2 : Reset =====", UVM_MEDIUM);
+        // reset_seq = ram_reset_seq::type_id::create("reset_seq");
+        // reset_seq.num_transations = (2 ** 8);
+        // reset_seq.start(m_sequencer);
+        // #20;
         //랜덤 쓰고 읽기
-        `uvm_info(get_type_name(), "===== Phase3 : random Read =====", UVM_MEDIUM);
+        `uvm_info(get_type_name(), "===== Phase2 : random Read =====", UVM_MEDIUM);
         random_read_seq = ram_random_read_write_seq::type_id::create("only_read_seq");
         random_read_seq.num_transations = 50;
         random_read_seq.start(m_sequencer);
