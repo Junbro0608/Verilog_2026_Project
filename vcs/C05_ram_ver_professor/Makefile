@@ -2,13 +2,14 @@
 #vcs -full64 -sverilog -debug_access+all -ntb_opts uvm-1.2 -timescale=1ns/1ps -kdb -lca -o simv ./rtl/adder.sv ./tb/tb_adder.sv
 
 #-------------------value---------------------
-NAME		:= counter
+NAME		:= ram
 TOP 		:= tb_top
-TEST 		:= $(NAME)_test
-VERBOSITY 	:= UVM_LOW
+TEST 		:= ram_write_read_test
+VERBOSITY 	:= UVM_DEBUG
 SEED 		:= random
 
 #-------------------file_name---------------------
+DATE    := $(shell date +%y%m%d_%H%M%S)
 INCLUDE := "\`include \"uvm_macros.svh\"\nimport uvm_pkg::*;\n"
 SEQ     := "\`include \"tb_seq.svh\"\n"
 
@@ -16,6 +17,7 @@ FILE_LIST  	:= filelist.f
 RTL_FILE 	:= $(NAME).sv
 TB_FILE	 	:= tb_$(NAME).sv
 SEQ_FILE 	:= tb_$(NAME)_seq.svh
+LOG_DIR 	:= ./logs
 LOG_FILE 	:= sim_$(TEST).log
 
 
@@ -27,12 +29,15 @@ COMP_OPTS := -full64 -sverilog -debug_access+all -kdb -lca -ntb_opts uvm-1.2 \
 			-cm line+cond+fsm+tgl+branch+assert
 
 
+
 SIM_OPTS := +UVM_TESTNAME=$(TEST) \
 			+UVM_VERBOSITY=$(VERBOSITY)	\
 			+ntb_random_seed=$(SEED) \
 			-cm line+cond+fsm+tgl+branch+assert \
 			-cm_dir coverage.vdb \
 			-cm_name sim1
+
+VERDI_OPTS := -dbdir simv.daidir -ssf novas.fsdb
 
 init:
 	mkdir -p rtl tb logs
@@ -47,22 +52,20 @@ comp:
 	@echo "타겟 컴파일 완료"
 	
 sim: comp
-	./simv $(SIM_OPTS)
-	@echo "로그 파일 저장 완료: logs/$(LOG_FILE)"
-	@echo "의존타겟 [$<] 완료"
-	@echo "타겟 [$@] 완료"
+	@mkdir -p $(LOG_DIR)
+	./simv $(SIM_OPTS) -l $(LOG_DIR)/$(TEST)_$(DATE).log
+	@ln -sf $$PWD/$(LOG_DIR)/$(TEST)_$(DATE).log $(LOG_DIR)/latest.log
+	@echo "로그 파일 저장 완료: $(LOG_DIR)/$(TEST)_$(DATE).log"
+	@echo "최신 로그 연결: $(LOG_DIR)/latest.log"
 
-simlog:
-	./simv $(SIM_OPTS) | tee logs/$(LOG_FILE)
-	@echo "로그 파일 저장 완료: logs/$(LOG_FILE)"
-	@echo "의존타겟 [$<] 완료"
-	@echo "타겟 [$@] 완료"
+verdi: sim
+	verdi $(VERDI_OPTS)
 
 verdi_c:
 	verdi -cov -covdir coverage.vdb
 
 clean:
-	rm -rf simv* csrc *.log *.vpd *.fsdb *.key *.h DVE*
+	rm -rf simv* csrc *.log *.vpd *.fsdb *.key *.h DVE* *.fsdb navas* *.conf *LOG
 	@echo "삭제 완료"
 
 

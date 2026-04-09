@@ -1,0 +1,101 @@
+@verdi rc file Version 1.0
+[General]
+saveDB = TRUE
+relativePath = FALSE
+saveSingleView = FALSE
+saveNWaveWinId = 
+VerdiVersion = Verdi_W-2024.09-SP2
+[KeyNote]
+Line1 = Automatic Backup 0
+Line2 = Save Open Database Information: Yes
+Line3 = Path Option: Absolute Paths
+Line4 = Windows Option: All Windows
+[OneSearch]
+isExisted = TRUE
+[TestBench]
+ConstrViewShow = 0
+InherViewShow = 0
+FSDBMsgShow = 0
+AnnotationShow = 0
+Console = TRUE
+powerDumped = 0
+[fusa]
+fdb_server = 
+fdb_proj = 
+fdb_campaign = 
+fdb_tool = 
+[hb]
+postSimFile = /home/hedu22/PROJECT/Verilog_2026_Project/vcs/C05_ram_ver_professor/inter.fsdb
+syncTime = 295000
+viewport = 1109 205 1228 1139 0 0 435 814
+activeNode = "uvm_custom_install_recording.unnamed$$_0._vcs_catcher.super.process_all_report_catchers.catcher.m_modified_report_message"
+activeScope = "uvm_custom_install_recording.unnamed$$_0._vcs_catcher.process_all_report_catchers.catcher.m_modified_report_message.do_copy.report_message.__m_uvm_field_automation.unnamed$$_0.local_data__.create.tmp._report_server.get_server.cs.inst.get_report_server.unn\
+amed$$_0.f.execute_report_message.unnamed$$_9.l_root.run_test"
+activeFile = "/tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_root.svh#inc__uvm_pkg__60#"
+interactiveMode = False
+viewType = Source
+simulatorMode = False
+sourceBeginLine = 508
+baMode = False
+srcLineNum = True
+AutoWrap = True
+IdentifyFalseLogic = False
+syncSignal = False
+traceMode = Hierarchical
+showTraceInSchema = True
+paMode = False
+funcMode = False
+powerAwareAnnot = True
+safetyAwareAnnot = True
+amsAnnot = True
+DnDtraceCrossHierOnly = True
+leadingZero = False
+signalPane = False
+SourceVerticalScrollLines = 5
+Scope1 = "uvm_custom_install_recording.unnamed$$_0._vcs_catcher.process_all_report_catchers.catcher.m_modified_report_message.do_copy.report_message.__m_uvm_field_automation.unnamed$$_0.local_data__.create.tmp._report_server.get_server.cs.inst.get_report_server.unn\
+amed$$_0.f.execute_report_message.unnamed$$_9.l_root.run_test"
+Scope2 = "uvm_pkg"
+Scope3 = "tb_ram"
+rangeSelection = 527 527 1 4 1 1
+sdfCheckUndef = FALSE
+simFlow = FALSE
+[hb.design]
+importCmd = "-dbdir" "simv.daidir" 
+invokeDir = /home/hedu22/PROJECT/Verilog_2026_Project/vcs/C05_ram_ver_professor
+[hb.sourceTab.1]
+scope = uvm_custom_install_recording.unnamed$$_0._vcs_catcher.process_all_report_catchers.catcher.m_modified_report_message.do_copy.report_message.__m_uvm_field_automation.unnamed$$_0.local_data__.create.tmp._report_server.get_server.cs.inst.get_report_server.unna\
+med$$_0.f.execute_report_message.unnamed$$_9.l_root.run_test
+File = /tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/base/uvm_root.svh#inc__uvm_pkg__60#
+Line = 509
+[nMemoryManager]
+WaveformFile = /home/hedu22/PROJECT/Verilog_2026_Project/vcs/C05_ram_ver_professor/inter.fsdb
+UserActionNum = 0
+nMemWindowNum = 0
+[wave.0]
+viewPort = 0 25 812 450 115 65
+primaryWindow = TRUE
+SessionFile = /home/hedu22/PROJECT/Verilog_2026_Project/vcs/C05_ram_ver_professor/verdiLog/novas_autosave.ses.wave.0
+displayGrid = FALSE
+hierarchicalName = FALSE
+waveformToolTip = FALSE
+snap = TRUE
+displayLeadingZeros = FALSE
+displayGridLine = FALSE
+fixDelta = FALSE
+displayCursorMarker = FALSE
+autoUpdate = TRUE
+highlightGlitchs = FALSE
+waveformSyncCursorMarker = FALSE
+waveformSyncHorizontalRange = FALSE
+waveformSyncVerticalscroll = FALSE
+displayErrors = TRUE
+displayMsgSymbols = TRUE
+showMsgDescriptions = TRUE
+autoFit = FALSE
+displayDeltaY = FALSE
+centerCursor = FALSE
+fsaRegMask = TRUE
+fsaCoreMask = TRUE
+fsaSfsmMask = TRUE
+fsaEcrMask = TRUE
+tPropMask = TRUE
