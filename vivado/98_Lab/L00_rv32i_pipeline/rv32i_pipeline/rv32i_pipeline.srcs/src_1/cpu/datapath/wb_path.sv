@@ -2,24 +2,23 @@
 
 module wb_path (
     //ctrl_unit
-    input [2:0] i_cu_rf_wd_sel,
-    //ID
-    input [31:0] i_id_imm,
-    output [31:0] o_wb_mux_out,
-    //EX
-    input [31:0] i_ex_alu_result,
-    input [31:0] i_ex_pc_plus_imm,
-    input [31:0] i_ex_pc_plus_4,
-    //MEM
-    input [31:0] i_mem_rdata
+    input  [ 2:0] i_cu_rf_wd_sel,
+    //INPUT
+    input  [31:0] i_mem_alu_result,
+    input  [31:0] i_mem_dmem_rdata,
+    input  [31:0] i_mem_imm,
+    input  [31:0] i_mem_pc_plus_imm,
+    input  [31:0] i_mem_pc_plus_4,
+    //OUTPUT
+    output [31:0] o_wb_mux_out
 );
 
     mux_5x1 U_RF_WDATA_MUX (
-        .in0    (i_ex_alu_result),   //ALU
-        .in1    (i_mem_rdata),       //LOAD
-        .in2    (i_id_imm),     //LUI
-        .in3    (i_ex_pc_plus_imm),  //AUIPC
-        .in4    (i_ex_pc_plus_4),    //JAL,JALR
+        .in0    (i_mem_alu_result),   //ALU
+        .in1    (i_mem_dmem_rdata),   //LOAD
+        .in2    (i_mem_imm),          //LUI
+        .in3    (i_mem_pc_plus_imm),  //AUIPC
+        .in4    (i_mem_pc_plus_4),    //JAL,JALR
         .mux_sel(i_cu_rf_wd_sel),
         .mux_out(o_wb_mux_out)
     );

@@ -10,13 +10,13 @@ module dec_path (
     input        [31:0] i_if_instr_data,
     input        [31:0] i_if_pc,
     input        [31:0] i_if_pc_puls_4,
-    input        [31:0] i_wb_data,
+    input        [31:0] i_wb_mux_data,
     //Output
     output logic [31:0] o_dec_rs1,
     output logic [31:0] o_dec_rs2,
     output logic [31:0] o_dec_imm,
-    output logic [31:0] o_dec_pc_puls_4,
-    output logic [31:0] o_dec_pc_puls_rs1
+    output logic [31:0] o_dec_pc_plus_4,
+    output logic [31:0] o_dec_pc_plus_imm
 );
     //register_file
     logic [31:0] rd1, rd2;
@@ -25,13 +25,17 @@ module dec_path (
 
     always_ff @(posedge i_clk or posedge i_rst) begin : dec_path_ff
         if (i_rst) begin
-            o_dec_rs1 <= 0;
-            o_dec_rs2 <= 0;
-            o_dec_imm <= 0;
+            o_dec_rs1         <= 0;
+            o_dec_rs2         <= 0;
+            o_dec_imm         <= 0;
+            o_dec_pc_plus_4   <= 0;
+            o_dec_pc_puls_rs1 <= 0;
         end else begin
-            o_dec_rs1 <= rd1;
-            o_dec_rs2 <= rd2;
-            o_dec_imm <= imm_data;
+            o_dec_rs1         <= rd1;
+            o_dec_rs2         <= rd2;
+            o_dec_imm         <= imm_data;
+            o_dec_pc_plus_4   <= i_if_pc_plus_4;
+            o_dec_pc_plus_rs1 <= i_if_pc + imm_data;
         end
     end
 

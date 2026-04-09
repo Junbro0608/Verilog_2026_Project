@@ -7,35 +7,40 @@ module ex_path (
     //ctrl_unit
     input  alu_control_t        i_cu_alu_control,
     input                       i_cu_alu_src_sel,
-    //ID
+    //INPUT
     input                [31:0] i_id_rs1,
     input                [31:0] i_id_rs2,
     input                [31:0] i_id_imm_data,
-    //MEM
+    input                [31:0] i_id_pc_plus_4,
+    input                [31:0] i_id_pc_plus_imm,
+    //OUPUT
     output logic         [31:0] o_ex_alu_result,
-    //WB
-    output logic         [31:0] alu_result,
-    output logic         [31:0] o_ex_pc_plus_imm,
-    //IF
-    input  logic         [31:0] i_if_pc,
-    output logic                o_if_b_taken,
+    output logic         [31:0] o_ex_rs2,
+    output logic         [31:0] o_ex_imm,
+    output logic                o_ex_b_taken,
     output logic         [31:0] o_ex_pc_plus_4,
-    output logic         [31:0] pc_plus_imm
+    output logic         [31:0] o_ex_pc_plus_imm
 );
 
     //alu
     logic [31:0] alu_src2_mux_out;
-    assign pc_plus_imm = i_if_pc + i_id_imm_data;
+    logic b_taken;
 
     always_ff @(posedge i_clk or posedge i_rst) begin : ex_path_ff
         if (i_rst) begin
             o_ex_alu_result  <= 0;
+            o_ex_rs2         <= 0;
+            o_ex_imm         <= 0;
+            o_ex_b_taken     <= 0;
             o_ex_pc_plus_4   <= 0;
             o_ex_pc_plus_imm <= 0;
         end else begin
             o_ex_alu_result  <= alu_result;
-            o_ex_pc_plus_4   <= i_if_pc + 4;
-            o_ex_pc_plus_imm <= pc_plus_imm;
+            o_ex_rs2         <= i_id_rs2;
+            o_ex_imm         <= i_id_imm_data;
+            o_ex_b_taken     <= b_taken;
+            o_ex_pc_plus_4   <= i_id_pc_plus_4;
+            o_ex_pc_plus_imm <= i_id_pc_plus_imm;
         end
     end
 
@@ -52,7 +57,7 @@ module ex_path (
         .b          (alu_src2_mux_out),
         .alu_control(i_cu_alu_control),
         .alu_result (alu_result),
-        .b_taken    (o_if_b_taken)
+        .b_taken    (b_taken)
     );
 
 
