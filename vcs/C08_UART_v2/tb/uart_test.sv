@@ -27,7 +27,10 @@ class uart_base_test extends uvm_test;
 
 
     virtual task run_phase(uvm_phase phase);
-    
+        uart_base_seq seq;
+        phase.raise_objection(this);
+        
+        phase.drop_objection(this);
     endtask
 
     virtual task run_test_seq();

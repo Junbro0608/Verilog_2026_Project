@@ -85,3 +85,4 @@ wvZoomOut -win $_nWave2
 wvZoomOut -win $_nWave2
 wvZoomOut -win $_nWave2
 wvZoomOut -win $_nWave2
+debExit

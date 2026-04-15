@@ -2,11 +2,11 @@ Magic 271485
 Revision Verdi_W-2024.09-SP2
 
 ; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
-viewPort 0 25 1130 300 100 65
+viewPort 0 25 2560 594 117 65
 
 ; File list:
 ; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
-openDirFile -d / "" "/home/hedu22/PROJECT/Verilog_2026_Project/vcs/C08_UART_v2/novas.fsdb"
+openDirFile -d / "" "/home/hedu22/PROJECT/Verilog_2026_Project/vcs/C05_RAM_ver_professor/novas.fsdb"
 
 ; file time scale:
 ; fileTimeScale ### s|ms|us|ns|ps
@@ -15,19 +15,17 @@ openDirFile -d / "" "/home/hedu22/PROJECT/Verilog_2026_Project/vcs/C08_UART_v2/n
 signalSpacing 5
 
 ; windowTimeUnit is used for zoom, cursor & marker
-windowTimeUnit 1ns
-
 ; waveform viewport range
-zoom 0.000000 4166465.000000 1n
-cursor 989545.000000
+zoom 7570.649262 260504.321579
+cursor 94910.80576392624
 marker 0.000000
 
 ; user define markers
 ; userMarker time_pos marker_name color linestyle
 ; visible top row signal index
-top 1
+top 0
 ; marker line index
-markerPos 9
+markerPos 6
 
 ; event list
 ; addEvent event_name event_expression
@@ -47,17 +45,13 @@ COMPLEX_EVENT_END
 curSTATUS ByChange
 
 
-addGroup "DUT"
-activeDirFile "" "/home/hedu22/PROJECT/Verilog_2026_Project/vcs/C08_UART_v2/novas.fsdb"
-addSignal -h 15 /tb_uart/DUT/clk
-addSignal -h 15 -holdScope rst
-addSignal -h 15 -UNSIGNED -HEX -holdScope tx_data[7:0]
-addSignal -h 15 -holdScope tx_start
-addSignal -h 15 -holdScope tx
-addSignal -h 15 -holdScope tx_busy
-addSignal -h 15 -holdScope rx
-addSignal -h 15 -UNSIGNED -HEX -holdScope rx_data[7:0]
-addSignal -h 15 -holdScope rx_valid
+addGroup "r_if(ram_if)"
+activeDirFile "" "/home/hedu22/PROJECT/Verilog_2026_Project/vcs/C05_RAM_ver_professor/novas.fsdb"
+addSignal -h 15 /tb_ram/r_if/clk
+addSignal -h 15 -holdScope write
+addSignal -h 15 -UNSIGNED -HEX -holdScope addr[7:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope wdata[15:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope rdata[15:0]
 addGroup "G2"
 
 ; getSignalForm Scope Hierarchy Status
