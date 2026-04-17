@@ -59,7 +59,7 @@ module tb_i2c_master ();
     endtask
 
     task i2c_addr(byte addr);
-        slv_ack_in = 0;
+        slv_ack_in = 1;
         tx_data    = addr;
         cmd_start  = 1'b0;
         cmd_write  = 1'b1;
@@ -113,24 +113,24 @@ module tb_i2c_master ();
 
         clk = 0;
         rst = 1;
-        slv_ack_in = 1;
         repeat (3) @(posedge clk);
         rst = 0;
+        ack_in = 1;
         @(posedge clk);
 
-        // i2c_start();
-        // i2c_addr((SLA << 1) + 1'b0);
-        // i2c_write(8'h55, 0);
-        // i2c_write(8'haa, 0);
-        // i2c_write(8'h01, 0);
-        // i2c_write(8'h02, 0);
-        // i2c_write(8'h03, 0);
-        // i2c_write(8'h04, 0);
-        // i2c_write(8'h05, 0);
-        // i2c_write(8'h06, 0);
-        // i2c_write(8'hff, 1);
-        // i2c_stop();
-        // repeat (50) @(posedge clk);
+        i2c_start();
+        i2c_addr((SLA << 1) + 1'b0);
+        i2c_write(8'h55, 1);
+        i2c_write(8'haa, 1);
+        i2c_write(8'h01, 1);
+        i2c_write(8'h02, 1);
+        i2c_write(8'h03, 1);
+        i2c_write(8'h04, 1);
+        i2c_write(8'h05, 1);
+        i2c_write(8'h06, 1);
+        i2c_write(8'hff, 0);
+        i2c_stop();
+        repeat (50) @(posedge clk);
         ack_in = 1'b1;
         i2c_start();
         i2c_addr((SLA << 1) + 1'b1);
