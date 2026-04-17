@@ -147,12 +147,14 @@ module i2c_master (
                         bit_cnt      <= 0;
                         is_read      <= 1'b0;
                         state        <= DATA;
+                        sda_r        <= tx_data[7];
                     end else if (cmd_read) begin
                         rx_shift_reg <= 0;
                         bit_cnt      <= 0;
                         is_read      <= 1'b1;
                         ack_in_r     <= ack_in;
                         state        <= DATA;
+                        sda_r        <= 1'b1;
                     end else if (cmd_stop) begin
                         state <= STOP;
                     end else if (cmd_start) begin
@@ -163,32 +165,36 @@ module i2c_master (
                     if (qtr_tick) begin
                         case (step)
                             2'd0: begin
-                                scl_r <= 1'b0;
-                                sda_r <= (is_read) ? 1'b1 : tx_shift_reg[7];
+                                scl_r <= 1'b1;
                                 step  <= 2'd1;
                             end
                             2'd1: begin
                                 scl_r <= 1'b1;
-                                step  <= 2'd2;
-                            end
-                            2'd2: begin
-                                scl_r <= 1'b1;
                                 if (is_read) begin
                                     rx_shift_reg <= {rx_shift_reg[6:0], sda_i};
+                                end
+                                step <= 2'd2;
+                            end
+                            2'd2: begin
+                                scl_r <= 1'b0;
+                                if (!is_read) begin
+                                    tx_shift_reg <= {tx_shift_reg[6:0], 1'b0};
                                 end
                                 step <= 2'd3;
                             end
                             2'd3: begin
                                 scl_r <= 1'b0;
-                                if (!is_read) begin
-                                    tx_shift_reg <= {tx_shift_reg[6:0], 1'b0};
-                                end
-                                step <= 2'd0;
-
-                                if (bit_cnt == 7) begin
-                                    state <= DATA_ACK;
-                                end else begin
+                                step  <= 2'd0;
+                                if (bit_cnt < 7) begin
+                                    sda_r = (is_read) ? 1'b1 : tx_shift_reg[7];
                                     bit_cnt <= bit_cnt + 1;
+                                end else if (bit_cnt == 7) begin
+                                    state <= DATA_ACK;
+                                    if (is_read) begin
+                                        sda_r <= ack_in_r;
+                                    end else begin
+                                        sda_r <= 1'b1;  //sda input 설정
+                                    end
                                 end
                             end
                         endcase
@@ -198,25 +204,20 @@ module i2c_master (
                     if (qtr_tick) begin
                         case (step)
                             2'd0: begin
-                                scl_r <= 1'b0;
-                                if (is_read) begin
-                                    sda_r <= ack_in_r;
-                                end else begin
-                                    sda_r <= 1'b1;  //sda input 설정
-                                end
+                                scl_r <= 1'b1;
                                 step <= 2'd1;
                             end
                             2'd1: begin
                                 scl_r <= 1'b1;
-                                step  <= 2'd2;
-
-                            end
-                            2'd2: begin
                                 if (!is_read) begin  //ack 수신
                                     ack_out <= sda_i;
                                 end else begin
                                     rx_data <= rx_shift_reg;
                                 end
+                                step  <= 2'd2;
+                            end
+                            2'd2: begin
+                                scl_r <= 1'b0;
                                 step <= 2'd3;
                             end
                             2'd3: begin
