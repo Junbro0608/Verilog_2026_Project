@@ -1,0 +1,9 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+d:/Verilog_2026_Project/06_VGA/VGA_SW_RGB/VGA_SW_RGB.srcs/sources_1/VGA_Decoder.sv,1782884295,systemVerilog,,,,VGA_Decoder;pclk_gen;pixel_counter;vga_decoder,,uvm,,,,,,
+d:/Verilog_2026_Project/06_VGA/VGA_SW_RGB/VGA_SW_RGB.srcs/sources_1/VGA_RGB_SW.sv,1782888264,systemVerilog,,,,VGA_RGB_SW,,uvm,,,,,,
+d:/Verilog_2026_Project/06_VGA/VGA_color_test_img/VGA_color_test_img.srcs/sim_1/tb_vga_sw.sv,1782892624,systemVerilog,,,,tb_vga_sw,,uvm,,,,,,
+d:/Verilog_2026_Project/06_VGA/VGA_color_test_img/VGA_color_test_img.srcs/sources_1/VGA_RGB_img.sv,1782892919,systemVerilog,,,,VGA_RGB_img,,uvm,,,,,,
+d:/Verilog_2026_Project/06_VGA/VGA_color_test_img/VGA_color_test_img.srcs/sources_1/VGA_SW_top.sv,1782893025,systemVerilog,,,,VGA_SW_top,,uvm,,,,,,
