@@ -94,10 +94,10 @@ int main(void)
   OV7670_ResetSW();
   OV7670_SetResolution(QVGA);
   OV7670_SetColorFormat(RGB565);
-  OV7670_ShowColorBar(1);
-	OV7670_AutoExposureMode(1);
-	OV7670_SetBrightness(120);
-	OV7670_AutoGainMode(1);
+  //OV7670_ShowColorBar(1);
+  OV7670_AutoExposureMode(1);
+  OV7670_SetBrightness(120);
+  OV7670_AutoGainMode(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
