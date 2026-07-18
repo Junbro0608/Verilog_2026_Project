@@ -2,7 +2,7 @@
 #vcs -full64 -sverilog -debug_access+all -ntb_opts uvm-1.2 -timescale=1ns/1ps -kdb -lca -o simv ./rtl/adder.sv ./tb/tb_adder.sv
 
 #-------------------value---------------------
-NAME		:= AXI_SPI
+NAME		:= VGA
 TOP 		:= tb_top
 TEST 		:= AXI_SPI_write
 VERBOSITY 	:= UVM_DEBUG
