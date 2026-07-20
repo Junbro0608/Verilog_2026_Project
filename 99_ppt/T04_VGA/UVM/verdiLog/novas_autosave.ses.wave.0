@@ -1,0 +1,128 @@
+Magic 271485
+Revision Verdi_W-2024.09-SP2
+
+; Window Layout <x> <y> <width> <height> <signalwidth> <valuewidth>
+viewPort 0 25 2560 594 193 140
+
+; File list:
+; openDirFile [-d delimiter] [-s time_offset] [-rf auto_bus_rule_file] path_name file_name
+openDirFile -d / "" "/home/hedu22/PROJECT/Verilog_2026_Project/99_ppt/T04_VGA/UVM/novas.fsdb"
+
+; file time scale:
+; fileTimeScale ### s|ms|us|ns|ps
+
+; signal spacing:
+signalSpacing 5
+
+; windowTimeUnit is used for zoom, cursor & marker
+windowTimeUnit 1ns
+
+; waveform viewport range
+zoom 0.000000 36603006.000000 1n
+cursor 15680135.000000
+marker 0.000000
+
+; user define markers
+; userMarker time_pos marker_name color linestyle
+; visible top row signal index
+top 0
+; marker line index
+markerPos 1
+
+; event list
+; addEvent event_name event_expression
+; curEvent event_name
+
+
+
+COMPLEX_EVENT_BEGIN
+
+
+COMPLEX_EVENT_END
+
+
+
+; toolbar current search type
+; curSTATUS search_type
+curSTATUS ByChange
+
+
+addGroup "G1"
+activeDirFile "" "/home/hedu22/PROJECT/Verilog_2026_Project/99_ppt/T04_VGA/UVM/novas.fsdb"
+addSignal -h 15 -UNSIGNED -HEX /tb_VGA/U_top_slave/led[1:0]
+addSignal -h 15 -holdScope clk
+addSignal -h 15 -holdScope clk_25
+addSignal -h 15 -holdScope clk_100
+addSignal -h 15 -holdScope de
+addSignal -h 15 -holdScope h_sync
+addSignal -h 15 -holdScope v_sync
+addSignal -h 15 -holdScope Mscale
+addSignal -h 15 -holdScope ack_out
+addSignal -h 15 -UNSIGNED -HEX -holdScope addr[16:0]
+addSignal -h 15 -holdScope busy
+addSignal -h 15 -UNSIGNED -HEX -holdScope cam_raddr[13:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope cam_rdata[11:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope cam_waddr[13:0]
+addSignal -h 15 -holdScope cam_we
+addSignal -h 15 -UNSIGNED -HEX -holdScope data[1:0]
+addSignal -h 15 -holdScope de_d
+addSignal -h 15 -UNSIGNED -HEX -holdScope downscale_color[11:0]
+addSignal -h 15 -holdScope ds_valid
+addSignal -h 15 -holdScope frame_done
+addSignal -h 15 -holdScope frame_ready
+addSignal -h 15 -holdScope full
+addSignal -h 15 -holdScope href
+addSignal -h 15 -UNSIGNED -HEX -holdScope imgPxlData[15:0]
+addSignal -h 15 -holdScope ov7670_pclk
+addSignal -h 15 -holdScope ov7670_vsync
+addSignal -h 15 -holdScope p_tick
+addSignal -h 15 -UNSIGNED -HEX -holdScope pdata[7:0]
+addSignal -h 15 -holdScope xclk
+addSignal -h 15 -UNSIGNED -HEX -holdScope port_blue[3:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope port_green[3:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope port_red[3:0]
+addSignal -h 15 -holdScope push
+addSignal -h 15 -UNSIGNED -HEX -holdScope push_data[7:0]
+addSignal -h 15 -holdScope reset
+addSignal -h 15 -holdScope scl
+addSignal -h 15 -holdScope scl_s
+addSignal -h 15 -holdScope sda
+addSignal -h 15 -holdScope sda_s
+addSignal -h 15 -holdScope send_abort
+addSignal -h 15 -holdScope send_done
+addSignal -h 15 -holdScope send_start
+addSignal -h 15 -holdScope sender_busy
+addSignal -h 15 -holdScope sender_done
+addSignal -h 15 -holdScope sending
+addSignal -h 15 -holdScope spi_cs_n
+addSignal -h 15 -holdScope spi_miso
+addSignal -h 15 -holdScope spi_mosi
+addSignal -h 15 -holdScope spi_sclk
+addSignal -h 15 -UNSIGNED -HEX -holdScope wAddr[16:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope wData[15:0]
+addSignal -h 15 -holdScope we
+addSignal -h 15 -UNSIGNED -UDEC -holdScope x_pixel[9:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope x_pixel_d[9:0]
+addSignal -h 15 -UNSIGNED -UDEC -holdScope y_pixel[9:0]
+addSignal -h 15 -UNSIGNED -HEX -holdScope y_pixel_d[9:0]
+addGroup "G2"
+
+; getSignalForm Scope Hierarchy Status
+; active file of getSignalForm
+activeDirFile "" "/home/hedu22/PROJECT/Verilog_2026_Project/99_ppt/T04_VGA/UVM/novas.fsdb"
+
+GETSIGNALFORM_SCOPE_HIERARCHY_BEGIN
+getSignalForm close
+
+"/tb_VGA"
+"/tb_VGA/U_top_slave"
+"/tb_VGA/vif"
+
+SCOPE_LIST_BEGIN
+"/tb_VGA"
+"/tb_VGA/U_top_slave"
+SCOPE_LIST_END
+
+GETSIGNALFORM_SCOPE_HIERARCHY_END
+
+

@@ -13,24 +13,53 @@ import uvm_pkg::*;
 `include "VGA_env.sv"
 `include "VGA_test.sv"
 
-module tb_apb ();
+module tb_VGA ();
     logic clk;
-    logic rst_n;
-    initial pclk = 0;
-    always #5 pclk = ~pclk;
+    logic rst;
+    initial clk = 0;
+    always #5 clk = ~clk;
 
     VGA_if vif (
+        clk,
+        rst
     );
 
     //DUT
+    top_slave U_top_slave (
+        .clk         (clk),
+        .reset       (rst),
+        .led         (),
+        // ov7670
+        .ov7670_pclk (vif.pclk),
+        .xclk        (vif.xclk),
+        .href        (vif.href),
+        .ov7670_vsync(vif.vsync),
+        .pdata       (vif.pdata),
+        .scl         (),
+        .sda         (),
+        // VGA 
+        .port_red    (vif.port_red),
+        .port_green  (vif.port_green),
+        .port_blue   (vif.port_blue),
+        .h_sync      (vif.h_sync),
+        .v_sync      (vif.v_sync),
+        // spi slave
+        .spi_sclk    (),
+        .spi_mosi    (),
+        .spi_cs_n    (),
+        .spi_miso    (),
+        // i2c slave
+        .scl_s       (vif.scl_s),
+        .sda_s       (vif.sda_s)
+    );
 
     initial begin
         clk = 0;
-        rst_n = 0;
-        repeat (5) @(posedge pclk);
-        rst_n = 1;
+        rst = 1;
+        repeat (5) @(posedge clk);
+        rst = 0;
     end
-    
+
     initial begin
         uvm_config_db#(virtual VGA_if)::set(null, "*", "vif", vif);
         run_test();

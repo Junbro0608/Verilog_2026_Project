@@ -4,9 +4,9 @@
 `timescale 1ns / 1ps
 `include "uvm_macros.svh"
 import uvm_pkg::*;
-`include "VGA_ram_seq_item.sv"
-`include "VGA_ram_driver.sv"
-`include "VGA_ram_monitor.sv"
+`include "VGA_seq_item.sv"
+`include "VGA_driver.sv"
+`include "VGA_monitor.sv"
 
 
 typedef uvm_sequencer#(VGA_seq_item) VGA_sequencer;

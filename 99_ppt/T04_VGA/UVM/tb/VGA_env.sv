@@ -4,16 +4,16 @@
 `timescale 1ns / 1ps
 `include "uvm_macros.svh"
 import uvm_pkg::*;
-`include "apb_ram_agent.sv"
-`include "apb_ram_scoreboard.sv"
-`include "apb_ram_coverage.sv"
+`include "VGA_agent.sv"
+`include "VGA_scoreboard.sv"
+`include "VGA_coverage.sv"
 
-class apb_env extends uvm_env;
-    `uvm_component_utils(apb_env);
+class VGA_env extends uvm_env;
+    `uvm_component_utils(VGA_env);
 
-    apb_agent      agt;
-    apb_scoreboard scb;
-    apb_coverage   cov;
+    VGA_agent      agt;
+    VGA_scoreboard scb;
+    VGA_coverage   cov;
 
     function new(string name, uvm_component parent);
         super.new(name, parent);
@@ -21,9 +21,9 @@ class apb_env extends uvm_env;
 
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        agt = apb_agent::type_id::create("agt", this);
-        scb = apb_scoreboard::type_id::create("scb", this);
-        cov = apb_coverage::type_id::create("cov", this);
+        agt = VGA_agent::type_id::create("agt", this);
+        scb = VGA_scoreboard::type_id::create("scb", this);
+        cov = VGA_coverage::type_id::create("cov", this);
     endfunction
 
     virtual function void connect_phase(uvm_phase phase);

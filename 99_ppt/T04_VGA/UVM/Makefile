@@ -4,7 +4,7 @@
 #-------------------value---------------------
 NAME		:= VGA
 TOP 		:= tb_top
-TEST 		:= AXI_SPI_write
+TEST 		:= VGA_single_area_test
 VERBOSITY 	:= UVM_DEBUG
 SEED 		:= random
 

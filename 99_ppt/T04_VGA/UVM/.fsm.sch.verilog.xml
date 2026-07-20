@@ -1,0 +1,44 @@
+<Command name="schRTLInfo"  delimiter="."  >
+<RTLBlock >
+<RTLInfo   name="state_0"  type="2"  fileName="./rtl/Slave/OV7670_SCCB_Controller.sv"  >
+    <Seg beginLine="391"  endLine="482"  />
+  </RTLInfo>
+ <RTLInfo   name="step_1"  type="2"  fileName="./rtl/Slave/OV7670_SCCB_Controller.sv"  >
+    <Seg beginLine="394"  endLine="426"  />
+  </RTLInfo>
+ <Instance name="tb_VGA.U_top_slave.U_OV7670_SCCB_Controller.u_i2c_master"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_2"  type="2"  fileName="./rtl/Slave/i2c_slave.sv"  >
+    <Seg beginLine="306"  endLine="376"  />
+  </RTLInfo>
+ <Instance name="tb_VGA.U_top_slave.U_I2C_SLAVE"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_3"  type="2"  fileName="./rtl/Slave/frame_sender.sv"  >
+    <Seg beginLine="100"  endLine="145"  />
+  </RTLInfo>
+ <Instance name="tb_VGA.U_top_slave.U_YCOCG_frame_sender"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="user_verbosity_4"  type="2"  fileName="/tools/synopsys/vcs/W-2024.09-SP1/etc/uvm-1.2/verdi/uvm_custom_install_verdi_recorder.sv"  >
+    <Seg beginLine="47"  endLine="197"  />
+  </RTLInfo>
+ <Instance name="uvm_custom_install_verdi_recording"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_o_5"  type="2"  fileName="./rtl/Slave/OV7670_SCCB_Controller.sv"  >
+    <Seg beginLine="196"  endLine="259"  />
+  </RTLInfo>
+ <RTLInfo   name="state_i_6"  type="2"  fileName="./rtl/Slave/OV7670_SCCB_Controller.sv"  >
+    <Seg beginLine="272"  endLine="318"  />
+  </RTLInfo>
+ <Instance name="tb_VGA.U_top_slave.U_OV7670_SCCB_Controller"  />
+</RTLBlock>
+<RTLBlock >
+<RTLInfo   name="state_7"  type="2"  fileName="./rtl/Slave/spi_slave.sv"  >
+    <Seg beginLine="244"  endLine="277"  />
+  </RTLInfo>
+ <Instance name="tb_VGA.U_top_slave.U_SPI_Slave.U_SLAVE_DECODER"  />
+</RTLBlock>
+ </Command>
