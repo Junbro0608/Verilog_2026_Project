@@ -25,31 +25,21 @@ class VGA_single_area_noise_seq extends VGA_base_seq;
     `uvm_object_utils(VGA_single_area_noise_seq)
 
     // =========================================================
-    // 1. 랜덤 변수 선언 (구역 번호, 점의 시작 X, Y 좌표)
+    // 1. 랜덤 변수 선언 (오직 X, Y 좌표와 점 생성 여부만!)
     // =========================================================
-    rand int target_area;
     rand int start_x;
     rand int start_y;
+    rand bit enable_dot; // 0이면 점 없음(00), 1이면 랜덤 위치에 점 생성
 
-    // 2. 제약 조건 (Constraints)
-    constraint c_area { target_area inside {0, 1, 2, 3}; }
+    // 2. 제약 조건 (Constraints) - 화면 전체로 해제!
+    // 💡 Y 좌표: 상단 무시 구역(0~160)부터 하단 끝까지 어디든 떨어질 수 있음 (상자 높이 20 고려)
+    constraint c_y { start_y inside {[0:219]}; }
 
-    // 💡 Y 좌표: 원본 캔버스 기준 커트라인인 160(80*2) 아래쪽으로 배치 (상자 높이 20 고려)
-    constraint c_y { start_y inside {[170:210]}; }
+    // 💡 X 좌표: 화면 왼쪽 끝부터 오른쪽 끝까지 어디든 떨어질 수 있음 (상자 너비 15 고려)
+    constraint c_x { start_x inside {[0:304]}; }
 
-    // 💡 X 좌표: 원본 캔버스 기준 경계선(108, 216)에 맞게 안전지대 재설정 (상자 너비 15 고려)
-    constraint c_x {
-        if (target_area == 0) start_x == 0;
-        
-        // Area 1 (원본 기준 x < 108) -> 20부터 80까지 (최대 80+15=95)
-        if (target_area == 1) start_x inside {[20:80]};   
-        
-        // Area 2 (원본 기준 108 < x < 216) -> 130부터 190까지 (최대 190+15=205)
-        if (target_area == 2) start_x inside {[130:190]};  
-        
-        // Area 3 (원본 기준 x > 216) -> 230부터 290까지 (최대 290+15=305)
-        if (target_area == 3) start_x inside {[230:290]}; 
-    }
+    // 점을 생성할 확률 설정 (예: 80% 확률로 점 생성, 20%는 빈 화면)
+    constraint c_enable { enable_dot dist {1 := 80, 0 := 20}; }
 
     function new(string name = "VGA_single_area_noise_seq");
         super.new(name);
@@ -58,14 +48,14 @@ class VGA_single_area_noise_seq extends VGA_base_seq;
     virtual task body();
         VGA_seq_item item;
         
-        // 3. 프레임 시작 전, 변수들을 랜덤하게 섞습니다!
+        // 3. 프레임 시작 전 랜덤화
         if (!this.randomize()) `uvm_error(get_type_name(), "랜덤화 실패!")
 
-        if (target_area == 0)
-            `uvm_info(get_type_name(), " 이번 프레임 타겟: 점 없음 (00 출력 기대)!", UVM_LOW)
+        if (enable_dot == 0)
+            `uvm_info(get_type_name(), " 이번 프레임: 빈 화면 (빨간 점 없음, 00 출력 기대)", UVM_LOW)
         else
-            `uvm_info(get_type_name(), $sformatf(" 이번 프레임 타겟: Area %0d 랜덤 좌표 (X: %0d~%0d, Y: %0d~%0d) 생성!", 
-                      target_area, start_x, start_x+15, start_y, start_y+20), UVM_LOW)
+            `uvm_info(get_type_name(), $sformatf(" 이번 프레임: 무작위 폭격! 랜덤 좌표 (X: %0d~%0d, Y: %0d~%0d)에 점 생성!", 
+                      start_x, start_x+15, start_y, start_y+20), UVM_LOW)
 
         // 프레임 시작 VSYNC
         for (int i = 0; i < 3; i++) begin
@@ -79,10 +69,10 @@ class VGA_single_area_noise_seq extends VGA_base_seq;
                 item = VGA_seq_item::type_id::create("item");
                 start_item(item);
 
-                // 4. 랜덤으로 결정된 start_x, start_y를 기준으로 15x20 크기의 네모 주입
-                if (target_area != 0 && y >= start_y && y <= start_y + 20 && x >= start_x && x <= start_x + 15) begin
+                // 4. 화면 밖으로 튀어나가지 않는 범위 내에서 랜덤 네모 주입
+                if (enable_dot && y >= start_y && y <= start_y + 20 && x >= start_x && x <= start_x + 15) begin
                     item.inject_dot = 1'b1;
-                    item.rand_dot_rgb = 16'hF800; // 랜덤 좌표에 빨간 점!
+                    item.rand_dot_rgb = 16'hF800;
                 end else begin
                     item.inject_dot = 1'b0;
                     item.rand_dot_rgb = 16'h0000;
